@@ -6,3 +6,6 @@ Lib/
 Scripts/
 Share/
 pyvenv.cfg
+
+*.pyc
+__pycache__/
