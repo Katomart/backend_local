@@ -2,7 +2,8 @@
 import pytest
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from servidor.models.courses import Base, Platform, Course, Module, Lesson, File
+
+from servidor.models.courses import Base, PlatformAuth, Platform, Course, Module, Lesson, File
 
 @pytest.fixture(scope='module')
 def engine():
@@ -39,3 +40,36 @@ def test_course_module_lesson_file_structure(session):
     assert module.course.name == "Advanced Python", "Course name should be 'Advanced Python'"
     assert lesson.module.name == "Concurrency", "Module name should be 'Concurrency'"
     assert file.lesson.name == "AsyncIO Basics", "Lesson name should be 'AsyncIO Basics'"
+
+def test_platform_auth_creation_with_all_required_fields(session):
+    complete_auth = PlatformAuth(
+        login_url="http://example.com/login",
+        username="user_example",
+        password="secure_password",
+        is_logged_in=False
+    )
+    session.add(complete_auth)
+    session.commit()
+    
+    # Verifica inserções
+    inserted_auth = session.query(PlatformAuth).filter_by(username="user_example").first()
+    assert inserted_auth is not None
+    assert inserted_auth.password == "secure_password"
+    assert inserted_auth.is_logged_in is True
+
+def test_platform_auth(session):
+    session.query(PlatformAuth).delete()  # Clear all test data
+    auth = PlatformAuth(
+        username="user",
+        password="password",
+        token="12345",
+        token_expires_at=9999999999,  # Epoch time in seconds
+        is_logged_in=True
+    )
+    session.add(auth)
+    session.commit()
+
+    fetched_auth = session.query(PlatformAuth).first()
+    assert fetched_auth.token == "12345"
+    assert fetched_auth.token_expires_at == 9999999999
+    assert fetched_auth.is_logged_in == True

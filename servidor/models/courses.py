@@ -1,11 +1,35 @@
-from sqlalchemy import Column, Integer, String, ForeignKey
+import datetime
+
+from sqlalchemy import Column, Integer, String, ForeignKey, Boolean, BigInteger, JSON
 from sqlalchemy.orm import relationship
+
 from . import Base
+
+
+class PlatformAuth(Base):
+    __tablename__ = 'platform_auths'
+
+    id = Column(Integer, primary_key=True)
+    platform_id = Column(Integer, ForeignKey('platforms.id'))
+    login_url = Column(String)
+    username = Column(String, nullable=False)
+    password = Column(String, nullable=False)
+    token = Column(String)
+    refresh_token = Column(String)
+    token_expires_at = Column(BigInteger)
+    extra_data = Column(JSON)
+    is_logged_in = Column(Boolean, default=False)
+    valid_combination = Column(Boolean, default=True)
+    created_at = Column(BigInteger, default=lambda: int(datetime.datetime.now().timestamp()))
+    updated_at = Column(BigInteger, default=lambda: int(datetime.datetime.now().timestamp()), onupdate=lambda: int(datetime.datetime.now().timestamp()))
+
+    platform = relationship("Platform", back_populates="auths")
 
 class Platform(Base):
     __tablename__ = 'platforms'
     id = Column(Integer, primary_key=True)
     name = Column(String)
+    auths = relationship("PlatformAuth", back_populates="platform")
     courses = relationship("Course", back_populates="platform")
 
 class Course(Base):
