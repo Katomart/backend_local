@@ -15,3 +15,5 @@ def shutdown_session(exception=None):
     db_session.remove()
 
 Base.metadata.bind = engine
+
+Base.metadata.create_all(engine)
