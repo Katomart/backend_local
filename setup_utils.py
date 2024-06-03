@@ -124,14 +124,14 @@ export FLASK_ENV=development
     os.chmod(batch_name + '.sh', 0o755)
 
 
-def write_config_file(config_path: str='config.json', **kwargs) -> None:
+def write_config_file(config: dict, config_path: str='config.json') -> None:
     """Write the configuration file
     Params:
+        config (dict): The configuration dictionary
         config_path (str): The path to the configuration file
-        kwargs (dict): The configuration parameters
     """
     with open(config_path, 'w') as file:
-        json.dump(kwargs, file, indent=4)
+        json.dump(config, file, indent=4, ensure_ascii=False)
 
 def read_and_delete_config_file(config_path: str='config.json') -> dict:
     """Read the configuration file and returns its contents as well as deleting the file
