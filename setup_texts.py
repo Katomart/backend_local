@@ -12,7 +12,10 @@ SETUP_TEXTS = {
                     'executar o Katomart\n\t' + colorama.Fore.YELLOW + 'Caso você não possua alguma das ferramentas, '
                     'o utilitário irá te explicar sua necessidade e te perguntar se você deseja tentar uma instalacao '
                     'automática, ou, te guiar em como instalar cada uma manualmente.\n\n'
-                    + colorama.Style.RESET_ALL + 'Nem todas as ferramentas são necessárias, mas, melhoram a experiência!'
+                    + colorama.Style.RESET_ALL + 'Nem todas as ferramentas são necessárias, mas, melhoram a experiência!',
+        'check_python_version': colorama.Fore.YELLOW + 'Verificando sua versão do Python (versão mínima: 3.12)...' + colorama.Style.RESET_ALL,
+        'python_version_not_supported': colorama.Fore.RED + '\tDesculpe, sua versão do Python não é suportada por este aplicativo.\nAtualize-a (este script não interfere com o Python do usuário por risco de quebrar aplicações terceiras).' + colorama.Style.RESET_ALL,
+        'python_version_supported': colorama.Fore.GREEN + '\tSua versão do Python é suportada por este aplicativo!' + colorama.Style.RESET_ALL,
     },
     'en': {
         'unsupported_os': colorama.Fore.RED + 'Sorry, your operating system is not supported by this software.\nExiting.' + colorama.Style.RESET_ALL,
@@ -22,7 +25,10 @@ SETUP_TEXTS = {
                     "system to run this Software\n\t" + colorama.Fore.YELLOW + 'If you are missing some, you will receive '
                     'an explanation as to why it is needed and will be given the option to attempt an auto-installation, or '
                     'be guided on how to download it yourself.\n\n'
-                    + colorama.Style.RESET_ALL + 'Not all tools are required to run this software, but they are highly recommended!'
+                    + colorama.Style.RESET_ALL + 'Not all tools are required to run this software, but they are highly recommended!',
+        'check_python_version': colorama.Fore.YELLOW + 'Checking your Python version (minimum version: 3.12),,,' + colorama.Style.RESET_ALL,
+        'python_version_not_supported': colorama.Fore.RED + '\tSorry, your Python version is not supported by this software.\nPlease update it (this script does not interfere with the user\'s Python to avoid breaking third party applications).' + colorama.Style.RESET_ALL,
+        'python_version_supported': colorama.Fore.GREEN + '\tYour Python version is supported by this software!' + colorama.Style.RESET_ALL,
 
     }
 }
