@@ -63,3 +63,8 @@ def get_user_third_party_optin(tool_name: str='') -> tuple[bool, bool]:
 def create_venv(venv_path: str='.') -> None:
     """Create a virtual environment in the specified path."""
     subprocess.run([sys.executable, '-m', 'venv', venv_path], check=True)
+
+def install_requirements(venv_path: str='.', requirements_path: str='requirements.txt'):
+    """Install packages using pip from a requirements file in the created virtual environment."""
+    pip_executable = os.path.join(venv_path, 'Scripts', 'pip') if os.name == 'nt' else os.path.join(venv_path, 'bin', 'pip')
+    subprocess.run([pip_executable, 'install', '-r', requirements_path], check=True)
