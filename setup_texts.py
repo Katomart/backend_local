@@ -5,6 +5,8 @@ colorama.init(autoreset=True)
 
 SETUP_TEXTS = {
     'pt': {
+        'unsupported_os': colorama.Fore.RED + 'Desculpe, seu sistema operacional não é suportado por este aplicativo.\nSaindo.' + colorama.Style.RESET_ALL,
+        'which_language': colorama.Fore.YELLOW + '[pt] Digite o idioma que deseja utilizar (para continuar em português, digite: pt):\n' + colorama.Style.RESET_ALL,
         'welcome': colorama.Fore.CYAN + 'Boas vindas ao utilitário de instalação do Katomart!\n\n' + colorama.Style.RESET_ALL
                     + 'Este utilitário irá verificar se você possui as ferramentas de sistema necessárias para '
                     'executar o Katomart\n\t' + colorama.Fore.YELLOW + 'Caso você não possua alguma das ferramentas, '
@@ -13,6 +15,8 @@ SETUP_TEXTS = {
                     + colorama.Style.RESET_ALL + 'Nem todas as ferramentas são necessárias, mas, melhoram a experiência!'
     },
     'en': {
+        'unsupported_os': colorama.Fore.RED + 'Sorry, your operating system is not supported by this software.\nExiting.' + colorama.Style.RESET_ALL,
+        'which_language': colorama.Fore.YELLOW + '[en] Type in the language you want to use (to continue in english, type: en):\n' + colorama.Style.RESET_ALL,
         'welcome': colorama.Fore.CYAN + "Welcome to Katomart's setup script!\n\n" + colorama.Style.RESET_ALL
                     + "This tool will make sure that you've got all the needed third party tools installed in your "
                     "system to run this Software\n\t" + colorama.Fore.YELLOW + 'If you are missing some, you will receive '
