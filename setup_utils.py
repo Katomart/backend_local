@@ -133,7 +133,7 @@ def write_config_file(config_path: str='config.json', **kwargs) -> None:
     with open(config_path, 'w') as file:
         json.dump(kwargs, file, indent=4)
 
-def read_config_file(config_path: str='config.json') -> dict:
+def read_and_delete_config_file(config_path: str='config.json') -> dict:
     """Read the configuration file and returns its contents as well as deleting the file
     Params:
         config_path (str): The path to the configuration file
