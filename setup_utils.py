@@ -1,4 +1,5 @@
 import os
+import pathlib
 import shutil
 import subprocess
 import sys
@@ -8,6 +9,19 @@ SUPPORTED_LANGUAGES = {
     'portugues': 'pt',
     'english': 'en'
 }
+
+def remaining_path_length(path: pathlib.Path, os_type: str) -> int:
+    max_lengths = {
+        'win32': 260,
+        'darwin': 1024,
+        'linux': 4096
+    }
+    max_length = max_lengths.get(os_type, 260)
+
+    current_length = len(str(path.resolve()))
+    
+    remaining = max_length - current_length
+    return remaining
 
 def get_execution_path() -> str:
     """Get the path of the current script
