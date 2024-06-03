@@ -49,7 +49,9 @@ SETUP_TEXTS = {
                                              colorama.Fore.YELLOW + '2. Baixe a versão mais recente do Bento4 para o seu sistema operacional.\n' + colorama.Style.RESET_ALL +
                                              colorama.Fore.YELLOW + '3. Extraia os arquivos e adicione o arquivo /bin/mp4decrypt à variável "PATH" de suas Variáveis de Ambiente no seu sistema operacional.\n' + colorama.Style.RESET_ALL,
         'start_string': 'Iniciando o Katomart...',
-        'batch_name': 'executar_katomart'
+        'batch_name': 'executar_katomart',
+        'setup_complete': colorama.Fore.GREEN + 'Configuração concluída com sucesso! O Katomart está pronto para ser executado.\n '
+                                                'Para iniciar o Katomart, execute o arquivo "{}.{}" que foi criado nesta pasta. Bons downloads :)' + colorama.Style.RESET_ALL
     },
     'en': {
         'unsupported_os': colorama.Fore.RED + 'Sorry, your operating system is not supported by this software.\nExiting.' + colorama.Style.RESET_ALL,
@@ -96,6 +98,8 @@ SETUP_TEXTS = {
                                              colorama.Fore.YELLOW + '2. Download the latest version of Bento4 for your operating system.\n' + colorama.Style.RESET_ALL +
                                              colorama.Fore.YELLOW + '3. Extract the files and add /bin/mp4decrypt file to your system\'s "PATH" variable in your Environment Variables.\n' + colorama.Style.RESET_ALL,
         'start_string': 'Initializing Katomart...',
-        'batch_name': 'run_katomart'
+        'batch_name': 'run_katomart',
+        'setup_complete': colorama.Fore.GREEN + 'Setup completed successfully! Katomart is ready to be run.\n '
+                                                'To start Katomart, run the "{}.{}" file that was created in this folder. Happy downloading :)' + colorama.Style.RESET_ALL
     }
 }
