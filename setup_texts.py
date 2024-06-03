@@ -16,6 +16,9 @@ SETUP_TEXTS = {
         'check_python_version': colorama.Fore.YELLOW + 'Verificando sua versão do Python (versão mínima: 3.12)...' + colorama.Style.RESET_ALL,
         'python_version_not_supported': colorama.Fore.RED + '\tDesculpe, sua versão do Python não é suportada por este aplicativo.\nAtualize-a (este script não interfere com o Python do usuário por risco de quebrar aplicações terceiras).' + colorama.Style.RESET_ALL,
         'python_version_supported': colorama.Fore.GREEN + '\tSua versão do Python é suportada por este aplicativo!' + colorama.Style.RESET_ALL,
+        'check_user_os': colorama.Fore.YELLOW + 'Verificando seu sistema operacional...' + colorama.Style.RESET_ALL,
+        'unsupported_os': colorama.Fore.RED + '\tDesculpe, seu sistema operacional não é suportado por este aplicativo.\nSaindo.' + colorama.Style.RESET_ALL,
+        'supported_os': colorama.Fore.GREEN + '\tSeu sistema operacional é suportado por este aplicativo!' + colorama.Style.RESET_ALL,
     },
     'en': {
         'unsupported_os': colorama.Fore.RED + 'Sorry, your operating system is not supported by this software.\nExiting.' + colorama.Style.RESET_ALL,
@@ -29,6 +32,8 @@ SETUP_TEXTS = {
         'check_python_version': colorama.Fore.YELLOW + 'Checking your Python version (minimum version: 3.12),,,' + colorama.Style.RESET_ALL,
         'python_version_not_supported': colorama.Fore.RED + '\tSorry, your Python version is not supported by this software.\nPlease update it (this script does not interfere with the user\'s Python to avoid breaking third party applications).' + colorama.Style.RESET_ALL,
         'python_version_supported': colorama.Fore.GREEN + '\tYour Python version is supported by this software!' + colorama.Style.RESET_ALL,
-
+        'check_user_os': colorama.Fore.YELLOW + 'Checking your operating system...' + colorama.Style.RESET_ALL,
+        'unsupported_os': colorama.Fore.RED + '\tSorry, your operating system is not supported by this software.\nExiting.' + colorama.Style.RESET_ALL,
+        'supported_os': colorama.Fore.GREEN + '\tYour operating system is supported by this software!' + colorama.Style.RESET_ALL,
     }
 }
