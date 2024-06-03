@@ -40,6 +40,9 @@ if USER_OS not in SUPPORTED_OS:
     raise Exception(SETUP_TEXTS[USER_LANGUAGE]['unsupported_os'])
 print(SETUP_TEXTS[USER_LANGUAGE]['supported_os'])
 
+# MASTER PASSWORD
+USER_LOCAL_PASSWORD = input(SETUP_TEXTS[USER_LANGUAGE]['prompt_master_password'])
+
 # CLI TOOLS
 print(SETUP_TEXTS[USER_LANGUAGE]['cli_tool_introduction'])
 
@@ -107,3 +110,19 @@ setup_utils.create_startup_script(user_platform=USER_OS,
                                   venv_path=CLONE_DIRECTORY,
                                   start_string=SETUP_TEXTS[USER_LANGUAGE]['start_string'],
                                   batch_name=SETUP_TEXTS[USER_LANGUAGE]['batch_name'])
+
+CONFIGS = {
+    'user_language': USER_LANGUAGE,
+    'user_os': USER_OS,
+    'user_local_password': USER_LOCAL_PASSWORD,
+    'has_ffmpeg': HAS_FFMPEG,
+    'install_ffmpeg': INSTALL_FFMPEG,
+    'has_geckodriver': HAS_GECKODRIVER,
+    'install_geckodriver': INSTALL_GECKODRIVER,
+    'has_mp4decrypt': HAS_MP4DECRYPT,
+    'install_mp4decrypt': INSTALL_MP4DECRYPT
+}
+
+setup_utils.write_config_file(config=CONFIGS)
+
+print(SETUP_TEXTS[USER_LANGUAGE]['setup_complete'].format(SETUP_TEXTS[USER_LANGUAGE]['batch_name'], 'bat' if USER_OS == 'win32' else 'sh'))
