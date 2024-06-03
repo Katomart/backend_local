@@ -28,6 +28,10 @@ SETUP_TEXTS = {
         'cli_tool_located': colorama.Fore.GREEN + '\tA ferramenta "{}" foi localizada em seu sistema com sucesso!' + colorama.Style.RESET_ALL,
         'ffmpeg_introduction': colorama.Fore.YELLOW + 'O FFMPEG é uma ferramenta que permite a manipulação de arquivos de áudio e vídeo. '
                                 'Ele é necessário para a execução de algumas funcionalidades do Katomart que lidam com a codificação e normalização de vídeos.\n' + colorama.Style.RESET_ALL,
+        'ffmpeg_download_instructions': colorama.Fore.MAGENTA + 'Para instalar o FFMPEG, siga as instruções abaixo:\n\n' + colorama.Style.RESET_ALL +
+                                        colorama.Fore.YELLOW + '1. Acesse o site oficial do FFMPEG: https://ffmpeg.org/download.html\n' + colorama.Style.RESET_ALL +
+                                        colorama.Fore.YELLOW + '2. Baixe a versão mais recente do FFMPEG para o seu sistema operacional, de um distribuidor oficial (painel localizado à esquerda na página).\n' + colorama.Style.RESET_ALL +
+                                        colorama.Fore.YELLOW + '3. Extria os arquivos e adicione o arquivo /bin/ffmpeg à variável "PATH" de suas Variáveis de Ambiente no seu sistema operacional.\n' + colorama.Style.RESET_ALL,
         'cli_tool_optin_input_error': colorama.Fore.RED + 'Você deve digitar "download", "man" ou "skip" apenas!'
     },
     'en': {
@@ -54,6 +58,10 @@ SETUP_TEXTS = {
         'cli_tool_located': colorama.Fore.GREEN + '\tThe tool "{}" was successfully located in your system!' + colorama.Style.RESET_ALL,
         'ffmpeg_introduction': colorama.Fore.YELLOW + 'FFMPEG is a tool that allows for the manipulation of audio and video files. '
                                 'It is required for some of Katomart\'s functionalities that deal with video encoding and normalization.\n' + colorama.Style.RESET_ALL,
+        'ffmpeg_download_instructions': colorama.Fore.MAGENTA + 'To install FFMPEG, follow the instructions below:\n\n' + colorama.Style.RESET_ALL +
+                                        colorama.Fore.YELLOW + '1. Access the official FFMPEG website: https://ffmpeg.org/download.html\n' + colorama.Style.RESET_ALL +
+                                        colorama.Fore.YELLOW + '2. Download the latest version of FFMPEG for your operating system, from an official distributor (located on the left panel of the page).\n' + colorama.Style.RESET_ALL +
+                                        colorama.Fore.YELLOW + '3. Extract the files and add /bin/ffmpeg file to your system\'s "PATH" variable in your Environment Variables.\n' + colorama.Style.RESET_ALL,
         'cli_tool_optin_input_error': colorama.Fore.RED + 'You must type only "download", "man" or "skip"!'
     }
 }
