@@ -1,3 +1,4 @@
+import json
 import os
 import pathlib
 import shutil
@@ -121,3 +122,26 @@ export FLASK_ENV=development
     with open(batch_path, 'w') as file:
         file.write(script_content)
     os.chmod(batch_name + '.sh', 0o755)
+
+
+def write_config_file(config_path: str='config.json', **kwargs) -> None:
+    """Write the configuration file
+    Params:
+        config_path (str): The path to the configuration file
+        kwargs (dict): The configuration parameters
+    """
+    with open(config_path, 'w') as file:
+        json.dump(kwargs, file, indent=4)
+
+def read_config_file(config_path: str='config.json') -> dict:
+    """Read the configuration file and returns its contents as well as deleting the file
+    Params:
+        config_path (str): The path to the configuration file
+    Returns:
+        dict: The configuration parameters
+    """
+    configs = {}
+    with open(config_path, 'r') as file:
+        configs = json.load(file)
+    os.remove(config_path)
+    return configs
