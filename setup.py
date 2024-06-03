@@ -7,6 +7,9 @@ USER_OS = None
 HAS_FFMPEG = None
 INSTALL_FFMPEG = None
 
+HAS_MP4DECRYPT = None
+INSTALL_MP4DECRYPT = None
+
 SUPPORTED_PYTHON_VERSION = (3, 12)
 SUPPORTED_OS = ('win32', 'linux', 'darwin')
 
@@ -51,3 +54,22 @@ while True:
         continue
 if HAS_FFMPEG and not INSTALL_FFMPEG:
     print(SETUP_TEXTS[USER_LANGUAGE]['ffmpeg_download_instructions'])
+
+# MP4DECRYPT
+print(SETUP_TEXTS[USER_LANGUAGE]['mp4decrypt_introduction'])
+print(SETUP_TEXTS[USER_LANGUAGE]['check_for_cli_tool'].format('mp4decrypt'))
+HAS_MP4DECRYPT = setup_utils.check_for_cli_tool('mp4decrypt')
+if not HAS_MP4DECRYPT:
+    print(SETUP_TEXTS[USER_LANGUAGE]['cli_tool_not_located'].format('mp4decrypt'))
+else:
+    print(SETUP_TEXTS[USER_LANGUAGE]['cli_tool_located'].format('mp4decrypt'))
+    INSTALL_MP4DECRYPT = False
+while True:
+    try:
+        HAS_MP4DECRYPT, INSTALL_MP4DECRYPT = setup_utils.get_user_third_party_optin(tool_name='mp4decrypt')
+        break
+    except ValueError:
+        print(SETUP_TEXTS[USER_LANGUAGE]['cli_tool_optin_input_error'])
+        continue
+if HAS_MP4DECRYPT and not INSTALL_MP4DECRYPT:
+    print(SETUP_TEXTS[USER_LANGUAGE]['mp4decrypt_download_instructions'])
