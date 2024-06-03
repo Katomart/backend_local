@@ -1,5 +1,6 @@
 import os
 import shutil
+import subprocess
 import sys
 
 
@@ -58,3 +59,7 @@ def get_user_third_party_optin(tool_name: str='') -> tuple[bool, bool]:
         return False, False
     else:
         raise ValueError
+
+def create_venv(venv_path: str='.') -> None:
+    """Create a virtual environment in the specified path."""
+    subprocess.run([sys.executable, '-m', 'venv', venv_path], check=True)
