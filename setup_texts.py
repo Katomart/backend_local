@@ -39,7 +39,9 @@ SETUP_TEXTS = {
         'mp4decrypt_download_instructions': colorama.Fore.MAGENTA + 'Para instalar o MP4Decrypt, você precisa baixar o pacote do Bento4, para isto, siga as instruções abaixo:\n' + colorama.Style.RESET_ALL +
                                              colorama.Fore.YELLOW + '1. Acesse o site oficial do Bento4: https://www.bento4.com/downloads/\n' + colorama.Style.RESET_ALL +
                                              colorama.Fore.YELLOW + '2. Baixe a versão mais recente do Bento4 para o seu sistema operacional.\n' + colorama.Style.RESET_ALL +
-                                             colorama.Fore.YELLOW + '3. Extraia os arquivos e adicione o arquivo /bin/mp4decrypt à variável "PATH" de suas Variáveis de Ambiente no seu sistema operacional.\n' + colorama.Style.RESET_ALL
+                                             colorama.Fore.YELLOW + '3. Extraia os arquivos e adicione o arquivo /bin/mp4decrypt à variável "PATH" de suas Variáveis de Ambiente no seu sistema operacional.\n' + colorama.Style.RESET_ALL,
+        'start_string': 'Iniciando o Katomart...',
+        'batch_name': 'executar_katomart'
     },
     'en': {
         'unsupported_os': colorama.Fore.RED + 'Sorry, your operating system is not supported by this software.\nExiting.' + colorama.Style.RESET_ALL,
@@ -76,6 +78,8 @@ SETUP_TEXTS = {
         'mp4decrypt_download_instructions': colorama.Fore.MAGENTA + 'To install MP4Decrypt, you need to download the Bento4 package, follow the instructions below:\n' + colorama.Style.RESET_ALL +
                                              colorama.Fore.YELLOW + '1. Access the official Bento4 website: https://www.bento4.com/downloads/\n' + colorama.Style.RESET_ALL +
                                              colorama.Fore.YELLOW + '2. Download the latest version of Bento4 for your operating system.\n' + colorama.Style.RESET_ALL +
-                                             colorama.Fore.YELLOW + '3. Extract the files and add /bin/mp4decrypt file to your system\'s "PATH" variable in your Environment Variables.\n' + colorama.Style.RESET_ALL
+                                             colorama.Fore.YELLOW + '3. Extract the files and add /bin/mp4decrypt file to your system\'s "PATH" variable in your Environment Variables.\n' + colorama.Style.RESET_ALL,
+        'start_string': 'Initializing Katomart...',
+        'batch_name': 'run_katomart'
     }
 }

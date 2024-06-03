@@ -9,6 +9,13 @@ SUPPORTED_LANGUAGES = {
     'english': 'en'
 }
 
+def get_execution_path() -> str:
+    """Get the path of the current script
+    Returns:
+        str: The path of the current script
+    """
+    return os.path.dirname(os.path.abspath(__file__))
+
 def clear_screen(user_os: str='win32') -> None:
     """Clear the screen
     Params:
@@ -68,3 +75,35 @@ def install_requirements(venv_path: str='.', requirements_path: str='requirement
     """Install packages using pip from a requirements file in the created virtual environment."""
     pip_executable = os.path.join(venv_path, 'Scripts', 'pip') if os.name == 'nt' else os.path.join(venv_path, 'bin', 'pip')
     subprocess.run([pip_executable, 'install', '-r', requirements_path], check=True)
+
+def create_startup_script(user_platform: str='win32', venv_path: str='.', start_string: str='', batch_name: str='') -> None:
+    if user_platform == 'win32':
+        create_windows_batch(venv_path=venv_path, start_string=start_string, batch_name=batch_name)
+    elif user_platform in ['linux', 'darwin']:
+        create_unix_script(venv_path=venv_path, start_string=start_string, batch_name=batch_name)
+
+def create_windows_batch(venv_path: str='.', start_string: str='', batch_name: str='') -> None:
+    batch_path = os.path.join(venv_path, batch_name + '.bat')
+    batch_content = f"""
+@echo off
+echo {start_string}
+set FLASK_APP={venv_path}/servidor/app.py
+set FLASK_ENV=production
+{venv_path}/Scripts/flask run
+pause
+"""
+    with open(batch_path, 'w') as file:
+        file.write(batch_content)
+
+def create_unix_script(venv_path: str='.', start_string: str='', batch_name: str=''):
+    batch_path = os.path.join(venv_path, batch_name + '.sh')
+    script_content = f"""
+#!/bin/bash
+echo "{start_string}"
+export FLASK_APP={venv_path}/servidor/app.py
+export FLASK_ENV=development
+{venv_path}/bin/flask run
+"""
+    with open(batch_path, 'w') as file:
+        file.write(script_content)
+    os.chmod(batch_name + '.sh', 0o755)

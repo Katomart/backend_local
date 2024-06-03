@@ -1,6 +1,8 @@
 import setup_utils
 from setup_texts import SETUP_TEXTS
 
+CLONE_DIRECTORY = setup_utils.get_execution_path()
+
 USER_LANGUAGE = None
 USER_OS = None
 
@@ -29,7 +31,8 @@ if not setup_utils.check_python_support(*SUPPORTED_PYTHON_VERSION):
 print(SETUP_TEXTS[USER_LANGUAGE]['python_version_supported'])
 
 print(SETUP_TEXTS[USER_LANGUAGE]['check_user_os'])
-if setup_utils.get_operating_system() not in SUPPORTED_OS:
+USER_OS = setup_utils.get_operating_system()
+if USER_OS not in SUPPORTED_OS:
     raise Exception(SETUP_TEXTS[USER_LANGUAGE]['unsupported_os'])
 print(SETUP_TEXTS[USER_LANGUAGE]['supported_os'])
 
@@ -73,3 +76,13 @@ while True:
         continue
 if HAS_MP4DECRYPT and not INSTALL_MP4DECRYPT:
     print(SETUP_TEXTS[USER_LANGUAGE]['mp4decrypt_download_instructions'])
+
+
+# INSTALLATION
+setup_utils.clear_screen(user_os=USER_OS)
+setup_utils.create_venv(venv_path='.')
+setup_utils.install_requirements(venv_path='.', requirements_path='requirements.txt')
+setup_utils.create_startup_script(user_platform=USER_OS,
+                                  venv_path=CLONE_DIRECTORY,
+                                  start_string=SETUP_TEXTS[USER_LANGUAGE]['start_string'],
+                                  batch_name=SETUP_TEXTS[USER_LANGUAGE]['batch_name'])
