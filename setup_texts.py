@@ -20,7 +20,11 @@ SETUP_TEXTS = {
         'unsupported_os': colorama.Fore.RED + '\tDesculpe, seu sistema operacional não é suportado por este aplicativo.\nSaindo.' + colorama.Style.RESET_ALL,
         'supported_os': colorama.Fore.GREEN + '\tSeu sistema operacional é suportado por este aplicativo!' + colorama.Style.RESET_ALL,
         'cli_tool_introduction': colorama.Fore.YELLOW + 'Agora, vamos verificar se você possui as ferramentas de sistema instaladas e explicar uma por uma.\n\n' + colorama.Style.RESET_ALL,
-        'check_for_cli_tool': '\tVerificando se a ferramenta de linha de comando {} está instalada...',
+        'check_for_cli_tool': '\tVerificando se a ferramenta "{}" está instalada...',
+        'cli_tool_not_located': colorama.Fore.RED + '\tA ferramenta "{}" não foi localizada.' + colorama.Style.RESET_ALL +
+                                colorama.Fore.GREEN + 'Digite "download" para indicar que o programa deverá tentar realizar o download da ferramenta.' + colorama.Style.RESET_ALL +
+                                colorama.Fore.MAGENTA + 'Digite "man" para ler as instruções de download manual da ferramenta' + colorama.Style.RESET_ALL +
+                                colorama.Fore.YELLOW + 'Digite "skip" para ignorar a instalação desta ferramenta.' + colorama.Style.RESET_ALL,
     },
     'en': {
         'unsupported_os': colorama.Fore.RED + 'Sorry, your operating system is not supported by this software.\nExiting.' + colorama.Style.RESET_ALL,
@@ -38,6 +42,10 @@ SETUP_TEXTS = {
         'unsupported_os': colorama.Fore.RED + '\tSorry, your operating system is not supported by this software.\nExiting.' + colorama.Style.RESET_ALL,
         'supported_os': colorama.Fore.GREEN + '\tYour operating system is supported by this software!' + colorama.Style.RESET_ALL,
         'cli_tool_introduction': colorama.Fore.YELLOW + 'Now, we will be checking if you\'ve got the necessary third party system tools, as well as explain the need for each\n\n' + colorama.Style.RESET_ALL,
-        'check_for_cli_tool': '\tchecking if the tool {} is installed...',
+        'check_for_cli_tool': '\tchecking if the tool "{}" is installed...',
+        'cli_tool_not_located': colorama.Fore.RED + '\tThe tool "{}" was not found on your system.' + colorama.Style.RESET_ALL +
+                        colorama.Fore.GREEN + 'Type "download" to flag this tool as desirable and for the software to attempt installing it in your system.' + colorama.Style.RESET_ALL +
+                        colorama.Fore.MAGENTA + 'Type "man" to read how to manually download and install this tool.' + colorama.Style.RESET_ALL +
+                        colorama.Fore.YELLOW + 'Type "skip" to ignore this tool completely.' + colorama.Style.RESET_ALL,
     }
 }
