@@ -25,6 +25,7 @@ SETUP_TEXTS = {
                                 colorama.Fore.GREEN + 'Digite "download" para indicar que o programa deverá tentar realizar o download da ferramenta.' + colorama.Style.RESET_ALL +
                                 colorama.Fore.MAGENTA + 'Digite "man" para ler as instruções de download manual da ferramenta' + colorama.Style.RESET_ALL +
                                 colorama.Fore.YELLOW + 'Digite "skip" para ignorar a instalação desta ferramenta.' + colorama.Style.RESET_ALL,
+        'cli_tool_located': colorama.Fore.GREEN + '\tA ferramenta "{}" foi localizada em seu sistema com sucesso!' + colorama.Style.RESET_ALL,
     },
     'en': {
         'unsupported_os': colorama.Fore.RED + 'Sorry, your operating system is not supported by this software.\nExiting.' + colorama.Style.RESET_ALL,
@@ -47,5 +48,6 @@ SETUP_TEXTS = {
                         colorama.Fore.GREEN + 'Type "download" to flag this tool as desirable and for the software to attempt installing it in your system.' + colorama.Style.RESET_ALL +
                         colorama.Fore.MAGENTA + 'Type "man" to read how to manually download and install this tool.' + colorama.Style.RESET_ALL +
                         colorama.Fore.YELLOW + 'Type "skip" to ignore this tool completely.' + colorama.Style.RESET_ALL,
+        'cli_tool_located': colorama.Fore.GREEN + '\tThe tool "{}" was successfully located in your system!' + colorama.Style.RESET_ALL,
     }
 }
