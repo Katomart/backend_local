@@ -34,6 +34,7 @@ print(SETUP_TEXTS[USER_LANGUAGE]['supported_os'])
 print(SETUP_TEXTS[USER_LANGUAGE]['cli_tool_introduction'])
 
 # FFMPEG
+print(SETUP_TEXTS[USER_LANGUAGE]['ffmpeg_introduction'])
 print(SETUP_TEXTS[USER_LANGUAGE]['check_for_cli_tool'].format('ffmpeg'))
 HAS_FFMPEG = setup_utils.check_for_cli_tool('ffmpeg')
 if not HAS_FFMPEG:
@@ -41,3 +42,12 @@ if not HAS_FFMPEG:
 else:
     print(SETUP_TEXTS[USER_LANGUAGE]['cli_tool_located'].format('ffmpeg'))
     INSTALL_FFMPEG = False
+while True:
+    try:
+        HAS_FFMPEG, INSTALL_FFMPEG = setup_utils.get_user_third_party_optin(tool_name='ffmpeg')
+        break
+    except ValueError:
+        print(SETUP_TEXTS[USER_LANGUAGE]['cli_tool_optin_input_error'])
+        continue
+if HAS_FFMPEG and not INSTALL_FFMPEG:
+    print(SETUP_TEXTS[USER_LANGUAGE]['ffmpeg_download_instructions'])
