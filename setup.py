@@ -9,3 +9,5 @@ USER_LANGUAGE = input()
 if USER_LANGUAGE not in setup_utils.SUPPORTED_LANGUAGES.values():
     print('Unsupported language. Defaulting to English.')
     USER_LANGUAGE = 'en'
+
+print(SETUP_TEXTS[USER_LANGUAGE]['welcome'])
