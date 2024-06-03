@@ -3,6 +3,11 @@ import shutil
 import sys
 
 
+SUPPORTED_LANGUAGES = {
+    'portugues': 'pt',
+    'english': 'en'
+}
+
 def clear_screen(user_os: str='win32') -> None:
     """Clear the screen"""
     if user_os == 'win32':
