@@ -19,9 +19,10 @@ def set_default_config() -> None:
     db_session.add(char_conf)
 
     # Home Stuff
-    home_conf, repo_conf = set_home_address()
+    home_conf, repo_conf, dev_conf = set_home_address()
     db_session.add(home_conf)
     db_session.add(repo_conf)
+    db_session.add(dev_conf)
 
     db_session.commit()
 
@@ -48,14 +49,18 @@ def set_download_path(download_path: pathlib.Path=pathlib.Path(SERVER_PATH),
     return download_conf, char_conf
 
 def set_home_address(home_address: str='katomart.com',
-                      repo_url: str='https://github.com/katomaro/katomart') -> tuple[Configuration, Configuration]:
+                      repo_url: str='https://github.com/katomaro/katomart',
+                      development_org: str='https://github.com/katomart') -> tuple[Configuration, Configuration, Configuration]:
     """Set the home address for the application
     Params:
         home_address (str): The adress to which the application should phone to
         repo_url (str): The URL of the repository
+        development_org (str): The URL of the development organization
     Returns:
-        tuple[Configuration, Configuration]: The home address and the repository URL
+        tuple[Configuration, Configuration, Configuration]: The home address, the repository URL, and the development organization
     """
     home_conf = Configuration(key='home_address', value=home_address)
     repo_conf = Configuration(key='repository_url', value=repo_url)
-    return home_conf, repo_conf
+    dev_conf = Configuration(key='development_org', value=development_org)
+
+    return home_conf, repo_conf, dev_conf
