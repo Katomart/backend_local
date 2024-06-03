@@ -62,6 +62,23 @@ while True:
 if HAS_FFMPEG and not INSTALL_FFMPEG:
     print(SETUP_TEXTS[USER_LANGUAGE]['ffmpeg_download_instructions'])
 
+# GECKODRIVER
+print(SETUP_TEXTS[USER_LANGUAGE]['geckodriver_introduction'])
+print(SETUP_TEXTS[USER_LANGUAGE]['check_for_cli_tool'].format('geckodriver'))
+HAS_GECKODRIVER = setup_utils.check_for_cli_tool('geckodriver')
+if not HAS_GECKODRIVER:
+    print(SETUP_TEXTS[USER_LANGUAGE]['cli_tool_not_located'].format('geckodriver'))
+else:
+    print(SETUP_TEXTS[USER_LANGUAGE]['cli_tool_located'].format('geckodriver'))
+    INSTALL_GECKODRIVER = False
+while True:
+    try:
+        HAS_GECKODRIVER, INSTALL_GECKODRIVER = setup_utils.get_user_third_party_optin(tool_name='geckodriver')
+        break
+    except ValueError:
+        print(SETUP_TEXTS[USER_LANGUAGE]['cli_tool_optin_input_error'])
+        continue
+
 # MP4DECRYPT
 print(SETUP_TEXTS[USER_LANGUAGE]['mp4decrypt_introduction'])
 print(SETUP_TEXTS[USER_LANGUAGE]['check_for_cli_tool'].format('mp4decrypt'))
