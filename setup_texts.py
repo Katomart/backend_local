@@ -28,14 +28,18 @@ SETUP_TEXTS = {
         'cli_tool_located': colorama.Fore.GREEN + '\tA ferramenta "{}" foi localizada em seu sistema com sucesso!' + colorama.Style.RESET_ALL,
         'ffmpeg_introduction': colorama.Fore.YELLOW + 'O FFMPEG é uma ferramenta que permite a manipulação de arquivos de áudio e vídeo. '
                                 'Ele é necessário para a execução de algumas funcionalidades do Katomart que lidam com a codificação e normalização de vídeos.\n' + colorama.Style.RESET_ALL,
-        'ffmpeg_download_instructions': colorama.Fore.MAGENTA + 'Para instalar o FFMPEG, siga as instruções abaixo:\n\n' + colorama.Style.RESET_ALL +
+        'ffmpeg_download_instructions': colorama.Fore.MAGENTA + 'Para instalar o FFMPEG, siga as instruções abaixo:\n' + colorama.Style.RESET_ALL +
                                         colorama.Fore.YELLOW + '1. Acesse o site oficial do FFMPEG: https://ffmpeg.org/download.html\n' + colorama.Style.RESET_ALL +
                                         colorama.Fore.YELLOW + '2. Baixe a versão mais recente do FFMPEG para o seu sistema operacional, de um distribuidor oficial (painel localizado à esquerda na página).\n' + colorama.Style.RESET_ALL +
                                         colorama.Fore.YELLOW + '3. Extria os arquivos e adicione o arquivo /bin/ffmpeg à variável "PATH" de suas Variáveis de Ambiente no seu sistema operacional.\n' + colorama.Style.RESET_ALL,
         'cli_tool_optin_input_error': colorama.Fore.RED + 'Você deve digitar "download", "man" ou "skip" apenas!',
         'mp4decrypt_introduction': colorama.Fore.YELLOW + 'O MP4Decrypt é uma ferramenta que faz parte do Bento4 que permite a descriptografia de arquivos de vídeo no formato MP4.\n' + colorama.Style.RESET_ALL +
                                    colorama.Fore.MAGENTA + 'Ela é necessária apenas para baixar vídeos do Widevine, e para fazer esse processo você precisa de uma CDM válida de um ANDROID extraída pelo Frida.\n' +
-                                      'Caso você não saiba o que é isso, pule a instalação desta ferramenta, pois isto não será ensinado aqui, e você pode sempre baixar mais tarde.\n' + colorama.Style.RESET_ALL
+                                   'Caso você não saiba o que é isso, pule a instalação desta ferramenta, pois isto não será ensinado aqui, e você pode sempre baixar mais tarde.\n' + colorama.Style.RESET_ALL,
+        'mp4decrypt_download_instructions': colorama.Fore.MAGENTA + 'Para instalar o MP4Decrypt, você precisa baixar o pacote do Bento4, para isto, siga as instruções abaixo:\n' + colorama.Style.RESET_ALL +
+                                             colorama.Fore.YELLOW + '1. Acesse o site oficial do Bento4: https://www.bento4.com/downloads/\n' + colorama.Style.RESET_ALL +
+                                             colorama.Fore.YELLOW + '2. Baixe a versão mais recente do Bento4 para o seu sistema operacional.\n' + colorama.Style.RESET_ALL +
+                                             colorama.Fore.YELLOW + '3. Extraia os arquivos e adicione o arquivo /bin/mp4decrypt à variável "PATH" de suas Variáveis de Ambiente no seu sistema operacional.\n' + colorama.Style.RESET_ALL
     },
     'en': {
         'unsupported_os': colorama.Fore.RED + 'Sorry, your operating system is not supported by this software.\nExiting.' + colorama.Style.RESET_ALL,
@@ -61,13 +65,17 @@ SETUP_TEXTS = {
         'cli_tool_located': colorama.Fore.GREEN + '\tThe tool "{}" was successfully located in your system!' + colorama.Style.RESET_ALL,
         'ffmpeg_introduction': colorama.Fore.YELLOW + 'FFMPEG is a tool that allows for the manipulation of audio and video files. '
                                 'It is required for some of Katomart\'s functionalities that deal with video encoding and normalization.\n' + colorama.Style.RESET_ALL,
-        'ffmpeg_download_instructions': colorama.Fore.MAGENTA + 'To install FFMPEG, follow the instructions below:\n\n' + colorama.Style.RESET_ALL +
+        'ffmpeg_download_instructions': colorama.Fore.MAGENTA + 'To install FFMPEG, follow the instructions below:\n' + colorama.Style.RESET_ALL +
                                         colorama.Fore.YELLOW + '1. Access the official FFMPEG website: https://ffmpeg.org/download.html\n' + colorama.Style.RESET_ALL +
                                         colorama.Fore.YELLOW + '2. Download the latest version of FFMPEG for your operating system, from an official distributor (located on the left panel of the page).\n' + colorama.Style.RESET_ALL +
                                         colorama.Fore.YELLOW + '3. Extract the files and add /bin/ffmpeg file to your system\'s "PATH" variable in your Environment Variables.\n' + colorama.Style.RESET_ALL,
         'cli_tool_optin_input_error': colorama.Fore.RED + 'You must type only "download", "man" or "skip"!',
         'mp4decrypt_introduction': colorama.Fore.YELLOW + 'MP4Decrypt is a tool that is part of Bento4 that allows for the decryption of MP4 video files.\n' + colorama.Style.RESET_ALL +
                                    colorama.Fore.MAGENTA + 'It is only required for downloading Widevine videos, and to do so you need a valid ANDROID CDM extracted through Frida.\n' +
-                                   'If you don\'t know what this is, you SHOULD skip this, as it won\'t be taught here, and you can always download it later.\n' + colorama.Style.RESET_ALL
+                                   'If you don\'t know what this is, you SHOULD skip this, as it won\'t be taught here, and you can always download it later.\n' + colorama.Style.RESET_ALL,
+        'mp4decrypt_download_instructions': colorama.Fore.MAGENTA + 'To install MP4Decrypt, you need to download the Bento4 package, follow the instructions below:\n' + colorama.Style.RESET_ALL +
+                                             colorama.Fore.YELLOW + '1. Access the official Bento4 website: https://www.bento4.com/downloads/\n' + colorama.Style.RESET_ALL +
+                                             colorama.Fore.YELLOW + '2. Download the latest version of Bento4 for your operating system.\n' + colorama.Style.RESET_ALL +
+                                             colorama.Fore.YELLOW + '3. Extract the files and add /bin/mp4decrypt file to your system\'s "PATH" variable in your Environment Variables.\n' + colorama.Style.RESET_ALL
     }
 }
