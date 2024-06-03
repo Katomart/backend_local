@@ -32,8 +32,14 @@ SETUP_TEXTS = {
         'ffmpeg_download_instructions': colorama.Fore.MAGENTA + 'Para instalar o FFMPEG, siga as instruções abaixo:\n' + colorama.Style.RESET_ALL +
                                         colorama.Fore.YELLOW + '1. Acesse o site oficial do FFMPEG: https://ffmpeg.org/download.html\n' + colorama.Style.RESET_ALL +
                                         colorama.Fore.YELLOW + '2. Baixe a versão mais recente do FFMPEG para o seu sistema operacional, de um distribuidor oficial (painel localizado à esquerda na página).\n' + colorama.Style.RESET_ALL +
-                                        colorama.Fore.YELLOW + '3. Extria os arquivos e adicione o arquivo /bin/ffmpeg à variável "PATH" de suas Variáveis de Ambiente no seu sistema operacional.\n' + colorama.Style.RESET_ALL,
+                                        colorama.Fore.YELLOW + '3. Extraia os arquivos e adicione o arquivo /bin/ffmpeg à variável "PATH" de suas Variáveis de Ambiente no seu sistema operacional.\n' + colorama.Style.RESET_ALL,
         'cli_tool_optin_input_error': colorama.Fore.RED + 'Você deve digitar "download", "man" ou "skip" apenas!',
+        'geckodriver_introduction': colorama.Fore.YELLOW + 'O Geckodriver é uma ferramenta que permite a automação de navegadores web, e é necessário para alguns downloaders específicos funcionarem. Você também precisa ter o Firefox instalado.\n' + colorama.Style.RESET_ALL
+                                    + colorama.Fore.MAGENTA + '\t#Boycott Manifest V3 (chromium)' + colorama.Style.RESET_ALL,
+        'geckodriver_download_instructions': colorama.Fore.MAGENTA + 'Para instalar o Geckodriver, siga as instruções abaixo:\n' + colorama.Style.RESET_ALL +
+                                            colorama.Fore.YELLOW + '1. Instale o Mozilla Firefox (caso não tenha instalado): https://www.mozilla.org/pt-BR/firefox/new/\n' + colorama.Style.RESET_ALL +
+                                            colorama.Fore.YELLOW + '2. Acesse a aba de releases do Github do Geckodriver e baixe a versão correspondente ao seu sistema: https://github.com/mozilla/geckodriver/releases' + colorama.Style.RESET_ALL +
+                                            colorama.Fore.YELLOW + '3. Extraia os arquivos e adicione o arquivo "geckodriver" à variável "PATH" de suas Variáveis de Ambiente no seu sistema operacional.\n' + colorama.Style.RESET_ALL,
         'mp4decrypt_introduction': colorama.Fore.YELLOW + 'O MP4Decrypt é uma ferramenta que faz parte do Bento4 que permite a descriptografia de arquivos de vídeo no formato MP4.\n' + colorama.Style.RESET_ALL +
                                    colorama.Fore.MAGENTA + 'Ela é necessária apenas para baixar vídeos do Widevine, e para fazer esse processo você precisa de uma CDM válida de um ANDROID extraída pelo Frida.\n' +
                                    'Caso você não saiba o que é isso, pule a instalação desta ferramenta, pois isto não será ensinado aqui, e você pode sempre baixar mais tarde.\n' + colorama.Style.RESET_ALL,
@@ -74,6 +80,12 @@ SETUP_TEXTS = {
                                         colorama.Fore.YELLOW + '2. Download the latest version of FFMPEG for your operating system, from an official distributor (located on the left panel of the page).\n' + colorama.Style.RESET_ALL +
                                         colorama.Fore.YELLOW + '3. Extract the files and add /bin/ffmpeg file to your system\'s "PATH" variable in your Environment Variables.\n' + colorama.Style.RESET_ALL,
         'cli_tool_optin_input_error': colorama.Fore.RED + 'You must type only "download", "man" or "skip"!',
+        'geckodriver_introduction': colorama.Fore.YELLOW + 'Geckodriver is a tool that allows for web browser automation, and is required for some specific downloaders to work. You also need to have Firefox installed.\n' + colorama.Style.RESET_ALL
+                                    + colorama.Fore.MAGENTA + '\t#Boycott Manifest V3 (chromium)' + colorama.Style.RESET_ALL,
+        'geckodriver_download_instructions': colorama.Fore.MAGENTA + 'To install Geckodriver, follow the instructions below:\n' + colorama.Style.RESET_ALL +
+                                            colorama.Fore.YELLOW + '1. Install Mozilla Firefox (if you haven\'t already): https://www.mozilla.org/en-US/firefox/new/\n' + colorama.Style.RESET_ALL +
+                                            colorama.Fore.YELLOW + '2. Access the releases tab on the Geckodriver Github page and download the version corresponding to your system: https://github.com/mozilla/geckodriver/releases' + colorama.Style.RESET_ALL +
+                                            colorama.Fore.YELLOW + '3. Extract the files and add the "geckodriver" file to your system\'s "PATH" variable in your Environment Variables.\n' + colorama.Style.RESET_ALL,
         'mp4decrypt_introduction': colorama.Fore.YELLOW + 'MP4Decrypt is a tool that is part of Bento4 that allows for the decryption of MP4 video files.\n' + colorama.Style.RESET_ALL +
                                    colorama.Fore.MAGENTA + 'It is only required for downloading Widevine videos, and to do so you need a valid ANDROID CDM extracted through Frida.\n' +
                                    'If you don\'t know what this is, you SHOULD skip this, as it won\'t be taught here, and you can always download it later.\n' + colorama.Style.RESET_ALL,
