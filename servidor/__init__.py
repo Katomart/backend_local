@@ -16,4 +16,11 @@ def shutdown_session(exception=None):
 
 Base.metadata.bind = engine
 
+from servidor.models.configs import Configuration
+from servidor.models.courses import PlatformAuth
+from servidor.models.courses import Platform
+from servidor.models.courses import Course
+from servidor.models.courses import Module
+from servidor.models.courses import Lesson
+from servidor.models.courses import File
 Base.metadata.create_all(engine)
