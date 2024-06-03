@@ -26,6 +26,8 @@ SETUP_TEXTS = {
                                 colorama.Fore.MAGENTA + '\t\tDigite "man" para ler as instruções de download manual da ferramenta\n' + colorama.Style.RESET_ALL +
                                 colorama.Fore.YELLOW + '\t\tDigite "skip" para ignorar a instalação desta ferramenta.\n' + colorama.Style.RESET_ALL,
         'cli_tool_located': colorama.Fore.GREEN + '\tA ferramenta "{}" foi localizada em seu sistema com sucesso!' + colorama.Style.RESET_ALL,
+        'ffmpeg_introduction': colorama.Fore.YELLOW + 'O FFMPEG é uma ferramenta que permite a manipulação de arquivos de áudio e vídeo. '
+                                'Ele é necessário para a execução de algumas funcionalidades do Katomart que lidam com a codificação e normalização de vídeos.\n' + colorama.Style.RESET_ALL,
     },
     'en': {
         'unsupported_os': colorama.Fore.RED + 'Sorry, your operating system is not supported by this software.\nExiting.' + colorama.Style.RESET_ALL,
@@ -49,5 +51,7 @@ SETUP_TEXTS = {
                         colorama.Fore.MAGENTA + '\t\tType "man" to read how to manually download and install this tool.\n' + colorama.Style.RESET_ALL +
                         colorama.Fore.YELLOW + '\t\tType "skip" to ignore this tool completely.\n' + colorama.Style.RESET_ALL,
         'cli_tool_located': colorama.Fore.GREEN + '\tThe tool "{}" was successfully located in your system!' + colorama.Style.RESET_ALL,
+        'ffmpeg_introduction': colorama.Fore.YELLOW + 'FFMPEG is a tool that allows for the manipulation of audio and video files. '
+                                'It is required for some of Katomart\'s functionalities that deal with video encoding and normalization.\n' + colorama.Style.RESET_ALL,
     }
 }
