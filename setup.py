@@ -3,6 +3,8 @@ from setup_texts import SETUP_TEXTS
 
 USER_LANGUAGE = None
 USER_OS = None
+INSTALL_FFMPEG = None
+HAS_FFMPEG = None
 SUPPORTED_PYTHON_VERSION = (3, 12)
 SUPPORTED_OS = ('win32', 'linux', 'darwin')
 
@@ -25,3 +27,10 @@ print(SETUP_TEXTS[USER_LANGUAGE]['check_user_os'])
 if setup_utils.get_operating_system() not in SUPPORTED_OS:
     raise Exception(SETUP_TEXTS[USER_LANGUAGE]['unsupported_os'])
 print(SETUP_TEXTS[USER_LANGUAGE]['supported_os'])
+
+# CLI TOOLS
+print(SETUP_TEXTS[USER_LANGUAGE]['cli_tool_introduction'])
+
+# FFMPEG
+print(SETUP_TEXTS[USER_LANGUAGE]['check_for_cli_tool'].format('ffmpeg'))
+HAS_FFMPEG = setup_utils.check_for_cli_tool('ffmpeg')

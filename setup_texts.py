@@ -19,6 +19,8 @@ SETUP_TEXTS = {
         'check_user_os': colorama.Fore.YELLOW + 'Verificando seu sistema operacional...' + colorama.Style.RESET_ALL,
         'unsupported_os': colorama.Fore.RED + '\tDesculpe, seu sistema operacional não é suportado por este aplicativo.\nSaindo.' + colorama.Style.RESET_ALL,
         'supported_os': colorama.Fore.GREEN + '\tSeu sistema operacional é suportado por este aplicativo!' + colorama.Style.RESET_ALL,
+        'cli_tool_introduction': colorama.Fore.YELLOW + 'Agora, vamos verificar se você possui as ferramentas de sistema instaladas e explicar uma por uma.\n\n' + colorama.Style.RESET_ALL,
+        'check_for_cli_tool': '\tVerificando se a ferramenta de linha de comando {} está instalada...',
     },
     'en': {
         'unsupported_os': colorama.Fore.RED + 'Sorry, your operating system is not supported by this software.\nExiting.' + colorama.Style.RESET_ALL,
@@ -35,5 +37,7 @@ SETUP_TEXTS = {
         'check_user_os': colorama.Fore.YELLOW + 'Checking your operating system...' + colorama.Style.RESET_ALL,
         'unsupported_os': colorama.Fore.RED + '\tSorry, your operating system is not supported by this software.\nExiting.' + colorama.Style.RESET_ALL,
         'supported_os': colorama.Fore.GREEN + '\tYour operating system is supported by this software!' + colorama.Style.RESET_ALL,
+        'cli_tool_introduction': colorama.Fore.YELLOW + 'Now, we will be checking if you\'ve got the necessary third party system tools, as well as explain the need for each\n\n' + colorama.Style.RESET_ALL,
+        'check_for_cli_tool': '\tchecking if the tool {} is installed...',
     }
 }
