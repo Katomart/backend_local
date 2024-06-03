@@ -9,3 +9,9 @@ pyvenv.cfg
 
 *.pyc
 __pycache__/
+
+*.bat
+*.sh
+*.exe
+*.dll
+*.zip
