@@ -55,6 +55,9 @@ def set_default_config() -> None:
     use_original_media_name = Configuration(key='use_original_media_name', value='False')
     db_session.add(use_original_media_name)
 
+    media_name_fallback = Configuration(key='media_name_fallback', value='{tipo}')
+    db_session.add(media_name_fallback)
+
     download_subtitles = Configuration(key='download_subtitles', value='False')
     db_session.add(download_subtitles)
 
