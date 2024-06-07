@@ -55,6 +55,48 @@ def set_default_config() -> None:
     use_original_media_name = Configuration(key='use_original_media_name', value='False')
     db_session.add(use_original_media_name)
 
+    avoid_path_name_explosion_by_rooting = Configuration(key='avoid_path_name_explosion_by_rooting', value='True')
+    db_session.add(avoid_path_name_explosion_by_rooting)
+
+    avoid_path_name_shortening = Configuration(key='avoid_path_name_shortening', value='False')
+    db_session.add(avoid_path_name_shortening)
+
+    aggressive_path_name_shortening = Configuration(key='aggressive_path_name_shortening', value='False')
+    db_session.add(aggressive_path_name_shortening)
+
+    max_path_name_length = Configuration(key='max_path_name_length', value='45')
+    db_session.add(max_path_name_length)
+
+    on_path_explode_fail_all = Configuration(key='on_path_explode_fail_all', value='False')
+    db_session.add(on_path_explode_fail_all)
+
+    on_path_explode_cut_course_name = Configuration(key='on_path_explode_cut_course_name', value='False')
+    db_session.add(on_path_explode_cut_course_name)
+
+    on_path_explode_cut_module_name = Configuration(key='on_path_explode_cut_module_name', value='True')
+    db_session.add(on_path_explode_cut_module_name)
+
+    on_path_explode_cut_lesson_name = Configuration(key='on_path_explode_cut_lesson_name', value='True')
+    db_session.add(on_path_explode_cut_lesson_name)
+
+    on_path_explode_cut_file_name = Configuration(key='on_path_explode_cut_file_name', value='True')
+    db_session.add(on_path_explode_cut_file_name)
+
+    on_path_explode_use_name_fallback = Configuration(key='on_path_explode_use_name_fallback', value='True')
+    db_session.add(on_path_explode_use_name_fallback)
+
+    use_custom_ffmpeg_arguments = Configuration(key='use_custom_ffmpeg_arguments', value='False')
+    db_session.add(use_custom_ffmpeg_arguments)
+
+    custom_ffmpeg_arguments = Configuration(key='custom_ffmpeg_arguments', value='-i,"{input_file}",-c:v,libx264,-crf,23,-c:a,aac,-b:a,192k,"{output_file}"')
+    db_session.add(custom_ffmpeg_arguments)
+
+    use_fast_ffmpeg_hls_conversion = Configuration(key='fast_ffmpeg_hls_conversion', value='False')
+    db_session.add(use_fast_ffmpeg_hls_conversion)
+
+    fast_ffmpeg_hls_conversion_arguments = Configuration(key='fast_ffmpeg_hls_conversion_arguments', value='-i,"{input_file}",-c,copy,"{output_file}"')
+    db_session.add(fast_ffmpeg_hls_conversion_arguments)
+
     media_name_fallback = Configuration(key='media_name_fallback', value='{file_type}')
     db_session.add(media_name_fallback)
 
