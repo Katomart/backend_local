@@ -1,6 +1,6 @@
 import pathlib
 
-from setup_utils import get_execution_path, get_operating_system, remaining_path_length
+from setup_utils import get_execution_path, get_operating_system, remaining_path_length, read_and_delete_config_file
 
 from servidor import db_session
 
@@ -9,6 +9,17 @@ from models.configs import Configuration
 
 SERVER_PATH = get_execution_path()
 OPERATING_SYSTEM = get_operating_system()
+
+def set_config_from_setup() -> None:
+    """Set the configuration from the setup
+    """
+    setup_config = read_and_delete_config_file()
+
+    for key, value in setup_config.items():
+        config = Configuration(key=key, value=value)
+        db_session.add(config)
+
+    db_session.commit()
 
 def set_default_config() -> None:
     """Set the default application configuration
