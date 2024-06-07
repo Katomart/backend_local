@@ -76,6 +76,9 @@ def set_default_config() -> None:
     stream_threads = Configuration(key='stream_threads', value='5')
     db_session.add(stream_threads)
 
+    stream_prefer_ytdlp = Configuration(key='stream_prefer_ytdlp', value='False')
+    db_session.add(stream_prefer_ytdlp)
+
     download_maximum_retries_per_file = Configuration(key='download_maximum_retries_per_file', value='5')
     db_session.add(download_maximum_retries_per_file)
 
