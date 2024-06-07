@@ -121,7 +121,7 @@ def set_default_config() -> None:
     downloaded_videos_from_html_files = Configuration(key='downloaded_videos_from_html_files', value='False')
     db_session.add(downloaded_videos_from_html_files)
 
-    auth_threads = Configuration(key='auth_threads', value='5')
+    auth_threads = Configuration(key='auth_threads', value='1')
     db_session.add(auth_threads)
 
     # API CONFIGURATION
