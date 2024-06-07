@@ -58,6 +58,9 @@ def set_default_config() -> None:
     media_name_fallback = Configuration(key='media_name_fallback', value='{tipo}')
     db_session.add(media_name_fallback)
 
+    enumerate_files = Configuration(key='enumerate_files', value='True')
+    db_session.add(enumerate_files)
+
     download_subtitles = Configuration(key='download_subtitles', value='False')
     db_session.add(download_subtitles)
 
