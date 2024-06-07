@@ -55,7 +55,7 @@ def set_default_config() -> None:
     use_original_media_name = Configuration(key='use_original_media_name', value='False')
     db_session.add(use_original_media_name)
 
-    media_name_fallback = Configuration(key='media_name_fallback', value='{tipo}')
+    media_name_fallback = Configuration(key='media_name_fallback', value='{file_type}')
     db_session.add(media_name_fallback)
 
     enumerate_files = Configuration(key='enumerate_files', value='True')
