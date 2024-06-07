@@ -67,14 +67,14 @@ def set_default_config() -> None:
     download_quality_fallback = Configuration(key='download_quality_fallback', value='best')
     db_session.add(download_quality_fallback)
 
-    download_format = Configuration(key='download_format', value='mp4')
-    db_session.add(download_format)
+    video_download_format = Configuration(key='video_download_format', value='mp4')
+    db_session.add(video_download_format)
 
     download_threads = Configuration(key='download_threads', value='1')
     db_session.add(download_threads)
 
-    stream_threads = Configuration(key='stream_threads', value='5')
-    db_session.add(stream_threads)
+    stream_download_threads = Configuration(key='stream_download_threads', value='5')
+    db_session.add(stream_download_threads)
 
     stream_prefer_ytdlp = Configuration(key='stream_prefer_ytdlp', value='False')
     db_session.add(stream_prefer_ytdlp)
@@ -117,7 +117,6 @@ def set_default_config() -> None:
 
     auth_threads = Configuration(key='auth_threads', value='5')
     db_session.add(auth_threads)
-
 
     # API CONFIGURATION
     allow_remote_api_communication = Configuration(key='allow_remote_api_communication', value='False')
