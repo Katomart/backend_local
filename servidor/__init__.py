@@ -1,34 +1,31 @@
-# servidor/__init__.py
-from flask import Flask, Blueprint
-from sqlalchemy import create_engine
-from sqlalchemy.orm import scoped_session, sessionmaker
-from .models import Base
+from flask import Flask
+from .database import init_db, db_session
+from .blueprints import register_blueprints
 
-app = Flask(
-    __name__, 
-    template_folder="/front/templates",
-    static_folder="/front/static"
-)
-app.config["TEMPLATES_AUTO_RELOAD"] = True
+from .config import DevelopmentConfig, TestingConfig, ProductionConfig
 
-app.config['DATABASE_URL'] = "sqlite:///katomart.db"
-api_blueprint = Blueprint('api', __name__, url_prefix='/api')
-app.register_blueprint(api_blueprint)
+from .config import set_default_config
 
-engine = create_engine(app.config['DATABASE_URL'], connect_args={"check_same_thread": False})
-db_session = scoped_session(sessionmaker(bind=engine))
+def create_app(config_name='default'):
+    app = Flask(__name__, template_folder="/front/templates", static_folder="/front/static")
 
-@app.teardown_appcontext
-def shutdown_session(exception=None):
-    db_session.remove()
+    configs = {
+        'development': DevelopmentConfig,
+        'testing': TestingConfig,
+        'production': ProductionConfig,
+        'default': DevelopmentConfig
+    }
+    app.config.from_object(configs[config_name])
 
-Base.metadata.bind = engine
+    register_blueprints(app)
+    with app.app_context():
+        init_db(app)
+        set_default_config()
 
-from servidor.models.configs import Configuration
-from servidor.models.courses import PlatformAuth
-from servidor.models.courses import Platform
-from servidor.models.courses import Course
-from servidor.models.courses import Module
-from servidor.models.courses import Lesson
-from servidor.models.courses import File
-Base.metadata.create_all(engine)
+    @app.teardown_appcontext
+    def shutdown_session(exception=None):
+        if db_session is not None:
+            db_session.remove()
+
+    return app
+

@@ -2,11 +2,36 @@ import pathlib
 
 from setup_utils import get_execution_path, get_operating_system, remaining_path_length, read_and_delete_config_file
 
-from servidor import db_session
+from .database import db_session
 
-from models.configs import Configuration
+from servidor.models.configs import Configuration
+from servidor.models.courses import PlatformAuth, Platform, Course, Module, Lesson, File
 
-from sec import generate_hwid
+from .sec import generate_hwid
+
+
+class Config:
+    SECRET_KEY = 'katomart'
+    TEMPLATES_AUTO_RELOAD = True
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    SQLALCHEMY_ECHO = False
+
+class DevelopmentConfig(Config):
+    DEBUG = True
+    DATABASE_URL = 'sqlite:///dev.db'
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///dev.db'
+    SQLALCHEMY_ECHO = True
+
+class TestingConfig(Config):
+    TESTING = True
+    DATABASE_URL = 'sqlite:///:memory:'
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///:memory:'
+
+class ProductionConfig(Config):
+    DEBUG = False
+    DATABASE_URL = 'sqlite:///katomart.db'
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///katomart.db'
+    SECRET_KEY = 'katomart'
 
 
 SERVER_PATH = get_execution_path()
