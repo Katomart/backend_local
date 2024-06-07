@@ -140,6 +140,9 @@ def read_and_delete_config_file(config_path: str='config.json') -> dict:
     Returns:
         dict: The configuration parameters
     """
+    # TODO set default to all false
+    if not os.path.exists(config_path):
+        return None
     configs = {}
     with open(config_path, 'r') as file:
         configs = json.load(file)
