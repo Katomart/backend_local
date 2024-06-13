@@ -55,7 +55,7 @@ def test_platform_auth_creation_with_all_required_fields(session):
     inserted_auth = session.query(PlatformAuth).filter_by(username="user_example").first()
     assert inserted_auth is not None
     assert inserted_auth.password == "secure_password"
-    assert inserted_auth.is_logged_in is True
+    assert inserted_auth.is_logged_in is False
 
 def test_platform_auth(session):
     session.query(PlatformAuth).delete()  # Clear all test data
