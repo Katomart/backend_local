@@ -18,15 +18,15 @@ def test_criacao_configuracao(tables):
     session = Session()
     
     # Criando uma nova configuração
-    config = Configuration(key="intervalo_scraping", value="3600", ativo=True)
+    config = Configuration(key="intervalo_scraping", value="3600", enabled=True)
     session.add(config)
     session.commit()
     
     # Buscando e verificando a configuração inserida
     config_inserida = session.query(Configuration).first()
-    assert config_inserida.chave == "intervalo_scraping"
-    assert config_inserida.valor == "3600"
-    assert config_inserida.ativo is True
+    assert config_inserida.key == "intervalo_scraping"
+    assert config_inserida.value == "3600"
+    assert config_inserida.enabled is True
     session.close()
 
 def test_atualizacao_configuracao(tables):
@@ -36,10 +36,10 @@ def test_atualizacao_configuracao(tables):
     
     # Atualizando a configuração
     config = session.query(Configuration).filter_by(key="intervalo_scraping").first()
-    config.valor = "1800"
+    config.value = "1800"
     session.commit()
     
     # Verificando a atualização
     config_atualizada = session.query(Configuration).first()
-    assert config_atualizada.valor == "1800"
+    assert config_atualizada.value == "1800"
     session.close()
