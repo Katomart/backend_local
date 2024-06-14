@@ -8,7 +8,7 @@ from .models.courses import PlatformAuth, Platform, Course, Module, Lesson, File
 def setup_api_routes(api_blueprint):
     @api_blueprint.route('/ping')
     def ping():
-        return jsonify({'message': 'pong'})
+        return jsonify({'message': 'pong'}), 200
 
     @requires_consent
     @requires_token
