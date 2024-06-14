@@ -17,3 +17,8 @@ def setup_api_routes(api_blueprint):
         all_accounts = PlatformAuth.query.all()
         return jsonify([account.to_dict() for account in all_accounts]), 200
     
+    @requires_consent
+    @api_blueprint.route('/get_all_platforms')
+    def get_all_platforms():
+        all_platforms = Platform.query.all()
+        return jsonify([platform.to_dict() for platform in all_platforms]), 200
