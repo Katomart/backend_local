@@ -6,6 +6,7 @@ from .database import db_session
 
 from servidor.models.configs import Configuration
 from servidor.models.courses import PlatformAuth, Platform, Course, Module, Lesson, File
+from servidor.models.dblog import Log
 
 from .sec import generate_hwid
 
