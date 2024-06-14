@@ -22,3 +22,9 @@ def setup_api_routes(api_blueprint):
     def get_all_platforms():
         all_platforms = Platform.query.all()
         return jsonify([platform.to_dict() for platform in all_platforms]), 200
+    
+    @requires_consent
+    @api_blueprint.route('/get_all_courses')
+    def get_all_courses():
+        all_courses = Course.query.all()
+        return jsonify([course.to_dict() for course in all_courses]), 200
