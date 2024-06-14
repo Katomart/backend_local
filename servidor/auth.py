@@ -9,7 +9,7 @@ def token_is_valid(token):
     # Placeholder
     return token == "katomart"
 
-def protected_request(f):
+def requires_token(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
         auth_header = request.headers.get('Authorization')
