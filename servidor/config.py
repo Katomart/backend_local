@@ -83,6 +83,9 @@ def set_default_config() -> None:
         user_local_consent = Configuration(key='user_local_consent', value='False')
         db_session.add(user_local_consent)
 
+        user_local_consent_date = Configuration(key='user_local_consent_date', value='0')
+        db_session.add(user_local_consent_date)
+
         last_execution = Configuration(key='last_execution', value='0')
         db_session.add(last_execution)
 
