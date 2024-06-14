@@ -89,6 +89,9 @@ def set_default_config() -> None:
         last_execution = Configuration(key='last_execution', value='0')
         db_session.add(last_execution)
 
+        run_in_debug_mode = Configuration(key='run_in_debug_mode', value='False')
+        db_session.add(run_in_debug_mode)
+
         enable_local_katomart_api = Configuration(key='enable_local_katomart_api', value='False')
         db_session.add(enable_local_katomart_api)
 
