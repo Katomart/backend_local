@@ -1,5 +1,5 @@
 import pytest
-from servidor import create_app, db_session
+from servidor import create_app, get_session
 from servidor.database import init_db
 
 @pytest.fixture
@@ -14,6 +14,7 @@ def app():
         init_db(app)
     yield app
     with app.app_context():
+        db_session = get_session()
         db_session.remove()
 
 @pytest.fixture

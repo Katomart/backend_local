@@ -1,5 +1,5 @@
-from flask import Flask
-from .database import init_db, db_session
+from flask import Flask, g
+from .database import init_db, get_session
 from .blueprints import register_blueprints
 
 from .config import DevelopmentConfig, TestingConfig, ProductionConfig
@@ -22,10 +22,13 @@ def create_app(config_name='default'):
         init_db(app)
         set_default_config()
 
-    @app.teardown_appcontext
+    @app.before_request
+    def create_session():
+        g.session = get_session()
+
+    @app.teardown_request
     def shutdown_session(exception=None):
-        if db_session is not None:
-            db_session.remove()
+        g.session.close()
 
     return app
 

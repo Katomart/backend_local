@@ -2,7 +2,7 @@ import pathlib
 
 from setup_utils import get_execution_path, get_operating_system, remaining_path_length, read_and_delete_config_file
 
-from .database import db_session
+from .database import get_session
 
 from servidor.models.configs import Configuration
 from servidor.models.courses import PlatformAuth, Platform, Course, Module, Lesson, File
@@ -43,8 +43,11 @@ def set_config_from_setup() -> None:
     """
     setup_config = read_and_delete_config_file()
 
+    # TODO
     if not setup_config:
         return
+
+    db_session = get_session()
 
     for key, value in setup_config.items():
         config = Configuration(key=key, value=value)
@@ -57,6 +60,7 @@ def set_config_from_setup() -> None:
 def has_default_configs_set():
     """Check if the default configurations have already been set in the database."""
     # Assuming there's a specific key in your Configuration table that is only added by set_default_configs
+    db_session = get_session()
     config_exists = db_session.query(Configuration).filter_by(key='default_config_set').first()
     return config_exists is not None
 
@@ -66,6 +70,7 @@ def set_default_config() -> None:
     if not has_default_configs_set():
         # DEFAULT CONFIGURATION
         set_config_from_setup()
+        db_session = get_session()
 
         default_config_set = Configuration(key='default_config_set', value='True')
         db_session.add(default_config_set)
