@@ -12,6 +12,7 @@ class PlatformAuth(Base):
     id = Column(Integer, primary_key=True)
     platform_id = Column(Integer, ForeignKey('platforms.id'))
     login_url = Column(String)
+    alternate_login_url = Column(String)
     username = Column(String, nullable=False)
     password = Column(String, nullable=False)
     token = Column(String)
