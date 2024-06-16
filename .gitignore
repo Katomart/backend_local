@@ -16,3 +16,4 @@ __pycache__/
 *.dll
 *.zip
 *.json
+*.db
