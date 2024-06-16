@@ -3,6 +3,8 @@ import time
 import json
 import requests
 
+from database import get_session
+
 
 class Account(ABC):
     """
@@ -12,6 +14,7 @@ class Account(ABC):
     de plataformas de cursos.
     """
     def __init__(self, account_id: int = 0, platform_id: int = 0):
+        self.db_session = get_session()
         self.account_id = account_id
         self.platform_id = platform_id
         self.session = self._restart_requests_session()
