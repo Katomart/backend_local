@@ -16,18 +16,6 @@ class Account(ABC):
         self.platform_id = platform_id
         self.session = self._restart_requests_session()
 
-    def _restart_requests_session(self,
-                                  user_agent: str = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:122.0) Gecko/20100101 Firefox/122.0'
-                                  ) -> requests.Session:
-        """
-        Inicia uma sessão limpa da biblioteca requests.
-
-        :return: Sessão da biblioteca requests com o User-Agent configurado.
-        """
-        session = requests.Session()
-        session.headers['User-Agent'] = user_agent
-        return session
-    
     def get_current_time(self) -> int:
         """
         Retorna o tempo atual em segundos.
@@ -39,24 +27,34 @@ class Account(ABC):
         Serializa dados da conta em formato JSON.
         """
         return json.dumps(data, indent=4, ensure_ascii=False)
-    
+
     def clone_main_session(self) -> requests.Session:
         """
         Clona a sessão principal da conta para uso temporário em requisições
         que podem mudar dados da sessão principal.
         """
-        ephemereal_session = requests.Session()
-        ephemereal_session.headers = self.session.headers
-        ephemereal_session.cookies = requests.utils.cookiejar_from_dict({c.name: c.value for c in self.session.cookies})
-        ephemereal_session.auth = self.session.auth
-        ephemereal_session.proxies = self.session.proxies
-        ephemereal_session.hooks = self.session.hooks.copy()
-        ephemereal_session.verify = self.session.verify
+        new_session = requests.Session()
+        new_session.headers.update(self.session.headers)
+        new_session.cookies.update(self.session.cookies)
 
-        return ephemereal_session
-    
+        new_session.auth = self.session.auth
+
+        if self.session.proxies:
+            new_session.proxies.update(self.session.proxies)
+        new_session.verify = self.session.verify
+
+        return new_session
+
     def __del__(self):
         self.logout()
+
+    def _restart_requests_session(self) -> requests.Session:
+            """
+            Inicia uma sessão limpa da biblioteca requests com configurações básicas.
+            """
+            session = requests.Session()
+            session.headers.update({'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:122.0) Gecko/20100101 Firefox/122.0'})
+            return session
 
     @abstractmethod
     def login(self):
