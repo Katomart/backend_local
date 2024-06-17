@@ -104,7 +104,7 @@ def create_windows_batch(venv_path: str='.', start_string: str='', batch_name: s
 echo {start_string}
 set FLASK_APP={venv_path}/servidor/app.py
 set FLASK_ENV=production
-{venv_path}/Scripts/flask run
+{venv_path}/Scripts/flask run --port=6102
 pause
 """
     with open(batch_path, 'w') as file:
@@ -117,7 +117,7 @@ def create_unix_script(venv_path: str='.', start_string: str='', batch_name: str
 echo "{start_string}"
 export FLASK_APP={venv_path}/servidor/app.py
 export FLASK_ENV=development
-{venv_path}/bin/flask run
+{venv_path}/bin/flask run --port=6102
 """
     with open(batch_path, 'w') as file:
         file.write(script_content)
