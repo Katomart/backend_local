@@ -7,7 +7,7 @@ from .config import DevelopmentConfig, TestingConfig, ProductionConfig
 from .config import set_default_config
 
 def create_app(config_name='default'):
-    app = Flask(__name__, template_folder="/front/templates", static_folder="/front/static")
+    app = Flask(__name__, static_folder='dist', template_folder='dist')
 
     configs = {
         'development': DevelopmentConfig,
@@ -25,6 +25,13 @@ def create_app(config_name='default'):
     @app.before_request
     def create_session():
         g.session = get_session()
+
+    @app.after_request
+    def after_request(response):
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+        response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
+        return response
 
     @app.teardown_request
     def shutdown_session(exception=None):
