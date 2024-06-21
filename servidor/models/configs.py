@@ -10,3 +10,11 @@ class Configuration(Base):
 
     def __repr__(self):
         return f"<Configuration(key='{self.key}', value='{self.value}', enabled={self.enabled})>"
+
+    def to_dict(self):
+        return {
+            'id': str(self.id),
+            'key': str(self.key),
+            'value': self.value.decode('utf-8') if isinstance(self.value, bytes) else str(self.value),
+            'enabled': str(self.enabled)
+        }
