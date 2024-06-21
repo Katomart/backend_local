@@ -69,10 +69,9 @@ def set_default_config() -> None:
     """
     if not has_default_configs_set():
         # DEFAULT CONFIGURATION
-        set_config_from_setup()
+        has_set_config= set_config_from_setup()
         db_session = get_session()
-
-        default_config_set = Configuration(key='default_config_set', value='True')
+        default_config_set = Configuration(key='default_config_set', value='True' if has_set_config else 'False')
         db_session.add(default_config_set)
 
         # Path Stuff
