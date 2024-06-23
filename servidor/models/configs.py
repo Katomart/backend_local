@@ -16,8 +16,8 @@ class Configuration(Base):
     def to_dict(self):
         if isinstance(self.value, bytes):
             normalized_value = self.value.decode('utf-8')
-        else:
-            normalized_value = json.loads(self.normalized_value)
+
+        normalized_value = json.loads(self.normalized_value)
         return {
             'id': int(self.id),
             'key': str(self.key),
