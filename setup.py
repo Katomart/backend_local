@@ -19,13 +19,17 @@ INSTALL_BENTO4 = None
 SUPPORTED_PYTHON_VERSION = (3, 12)
 SUPPORTED_OS = ('win32', 'linux', 'darwin')
 
-for language in SETUP_TEXTS:
-    print(SETUP_TEXTS[language]['which_language'])
-USER_LANGUAGE = input()
+# Multi-language support will be implemented at a later date as the project grows.
+#
+# for language in SETUP_TEXTS:
+#     print(SETUP_TEXTS[language]['which_language'])
+# USER_LANGUAGE = input()
+# 
+# if USER_LANGUAGE not in setup_utils.SUPPORTED_LANGUAGES.values():
+#     print('Unsupported language. Defaulting to English.')
+#     USER_LANGUAGE = 'en'
 
-if USER_LANGUAGE not in setup_utils.SUPPORTED_LANGUAGES.values():
-    print('Unsupported language. Defaulting to English.')
-    USER_LANGUAGE = 'en'
+USER_LANGUAGE = 'pt'
 
 print(SETUP_TEXTS[USER_LANGUAGE]['welcome'])
 
