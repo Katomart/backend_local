@@ -29,8 +29,7 @@ class Platform(Base):
     __tablename__ = 'platforms'
     id = Column(Integer, primary_key=True)
     name = Column(String)
-    login_url = Column(String)
-    alternate_login_url = Column(String)
+    base_url = Column(String)
     auths = relationship("PlatformAuth", back_populates="platform")
     courses = relationship("Course", back_populates="platform")
 
