@@ -6,7 +6,7 @@ from .config import DevelopmentConfig, TestingConfig, ProductionConfig
 
 from .config import set_default_config
 
-def create_app(config_name='default'):
+def create_app(config_name='production'):
     app = Flask(__name__, static_folder='dist', template_folder='dist')
 
     configs = {
