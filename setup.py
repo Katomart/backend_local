@@ -14,7 +14,7 @@ HAS_GECKODRIVER = None
 INSTALL_GECKODRIVER = None
 
 HAS_MP4DECRYPT = None
-INSTALL_MP4DECRYPT = None
+INSTALL_BENTO4 = None
 
 SUPPORTED_PYTHON_VERSION = (3, 12)
 SUPPORTED_OS = ('win32', 'linux', 'darwin')
@@ -62,7 +62,7 @@ while True:
     except ValueError:
         print(SETUP_TEXTS[USER_LANGUAGE]['cli_tool_optin_input_error'])
         continue
-if HAS_FFMPEG and not INSTALL_FFMPEG:
+if not INSTALL_FFMPEG:
     print(SETUP_TEXTS[USER_LANGUAGE]['ffmpeg_download_instructions'])
 
 # GECKODRIVER
@@ -76,30 +76,32 @@ else:
     INSTALL_GECKODRIVER = False
 while True:
     try:
-        HAS_GECKODRIVER, INSTALL_GECKODRIVER = setup_utils.get_user_third_party_optin(tool_name='geckodriver')
+        INSTALL_GECKODRIVER = setup_utils.get_user_third_party_optin(tool_name='geckodriver')
         break
     except ValueError:
         print(SETUP_TEXTS[USER_LANGUAGE]['cli_tool_optin_input_error'])
         continue
+if not INSTALL_GECKODRIVER:
+    print(SETUP_TEXTS[USER_LANGUAGE]['geckodriver_download_instructions'])
 
 # MP4DECRYPT
-print(SETUP_TEXTS[USER_LANGUAGE]['mp4decrypt_introduction'])
-print(SETUP_TEXTS[USER_LANGUAGE]['check_for_cli_tool'].format('mp4decrypt'))
+print(SETUP_TEXTS[USER_LANGUAGE]['bento4_introduction'])
+print(SETUP_TEXTS[USER_LANGUAGE]['check_for_cli_tool'].format('bento4'))
 HAS_MP4DECRYPT = setup_utils.check_for_cli_tool('mp4decrypt')
 if not HAS_MP4DECRYPT:
-    print(SETUP_TEXTS[USER_LANGUAGE]['cli_tool_not_located'].format('mp4decrypt'))
+    print(SETUP_TEXTS[USER_LANGUAGE]['cli_tool_not_located'].format('bento4'))
 else:
-    print(SETUP_TEXTS[USER_LANGUAGE]['cli_tool_located'].format('mp4decrypt'))
-    INSTALL_MP4DECRYPT = False
+    print(SETUP_TEXTS[USER_LANGUAGE]['cli_tool_located'].format('bento4'))
+    INSTALL_BENTO4 = False
 while True:
     try:
-        HAS_MP4DECRYPT, INSTALL_MP4DECRYPT = setup_utils.get_user_third_party_optin(tool_name='mp4decrypt')
+        INSTALL_BENTO4 = setup_utils.get_user_third_party_optin(tool_name='bento4')
         break
     except ValueError:
         print(SETUP_TEXTS[USER_LANGUAGE]['cli_tool_optin_input_error'])
         continue
-if HAS_MP4DECRYPT and not INSTALL_MP4DECRYPT:
-    print(SETUP_TEXTS[USER_LANGUAGE]['mp4decrypt_download_instructions'])
+if not INSTALL_BENTO4:
+    print(SETUP_TEXTS[USER_LANGUAGE]['bento4_download_instructions'])
 
 
 # INSTALLATION
@@ -119,8 +121,8 @@ CONFIGS = {
     'install_ffmpeg': INSTALL_FFMPEG,
     'has_geckodriver': HAS_GECKODRIVER,
     'install_geckodriver': INSTALL_GECKODRIVER,
-    'has_mp4decrypt': HAS_MP4DECRYPT,
-    'install_mp4decrypt': INSTALL_MP4DECRYPT
+    'has_bento4': HAS_MP4DECRYPT,
+    'install_bento4': INSTALL_BENTO4
 }
 
 setup_utils.write_config_file(config=CONFIGS)

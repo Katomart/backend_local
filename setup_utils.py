@@ -70,15 +70,12 @@ def get_user_third_party_optin(tool_name: str='') -> tuple[bool, bool]:
         tool_name (str): The name of the tool
     Returns:
         bool: Whether the user wants to install the tool
-        bool: Whether the user wants to download the tool
     """
-    user_input = input()
+    user_input = input(f'{tool_name.capitalize()} (download, skip): ')
     if user_input.lower() == 'download':
-        return True, True
-    elif user_input.lower() == 'man':
-        return True, False
+        return True
     elif user_input.lower() == 'skip':
-        return False, False
+        return False
     else:
         raise ValueError
 
