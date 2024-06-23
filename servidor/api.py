@@ -5,23 +5,54 @@ from flask import jsonify, g, send_from_directory
 from .auth import requires_token, requires_consent
 
 from .models.courses import PlatformAuth, Platform, Course, Module, Lesson, File
+from .models.configs import Configuration
+
+from .install import try_auto_install_bento4
 
 
 def setup_main_route(main_bp):
     @main_bp.route('/', defaults={'path': ''})
     @main_bp.route('/<path:path>')
     def catch_all(path):
-        static_folder = str(main_bp.static_folder)
-        path = str(path) if path else ''
-        if path and os.path.exists(os.path.join(static_folder, path)):
-            return send_from_directory(static_folder, path)
-        return send_from_directory(static_folder, 'app.html')
+        if path != "" and os.path.exists(main_bp.static_folder + '/' + path):
+            return send_from_directory(main_bp.static_folder, path)
+        else:
+            return send_from_directory(main_bp.static_folder, 'index.html')
 
 
 def setup_api_routes(api_blueprint):
-    @api_blueprint.route('/ping')
+    @api_blueprint.route('/ping', methods=['GET'])
     def ping():
         return jsonify({'message': 'pong'}), 200
+    
+    @api_blueprint.route('/test_route', methods=['GET'])
+    def test_route():
+        return jsonify(try_auto_install_bento4()), 200
+    
+    @api_blueprint.route('/get_katomart_password', methods=['GET'])
+    def get_katomart_password():
+        password = g.session.query(Configuration).filter_by(key='user_local_password').first()
+        if password is None:
+            return jsonify({'status': False, 'message': 'No password found'}), 403
+        return jsonify({'status': True, 'message': password.to_dict()}), 200
+    
+    @api_blueprint.route('/get_katomart_consent', methods=['GET'])
+    def get_katomart_consent():
+        has_consented = g.session.query(Configuration).filter_by(key='user_local_consent').first()
+        consent_date = g.session.query(Configuration).filter_by(key='user_local_consent_date').first()
+        if has_consented is None:
+            return jsonify({'status': False, 'message': 'No consent found'}), 403
+        return jsonify({
+            'status': True,
+            'message': consent_date.to_dict() if consent_date else 'No consent date found'
+        }), 200
+    
+    @api_blueprint.route('/get_all_configurations', methods=['GET'])
+    def get_all_configurations():
+        all_configurations = g.session.query(Configuration).all()
+        if not all_configurations:
+            return jsonify({'status': False, 'message': 'No configurations found'}), 404
+        return jsonify([configuration.to_dict() for configuration in all_configurations]), 200
 
 
     @api_blueprint.route('/get_all_accounts', methods=['GET'])

@@ -11,4 +11,11 @@ def try_auto_install_geckodriver():
     pass
 
 def try_auto_install_bento4():
-    pass
+    db_session = get_session()
+    try:
+        should_install = db_session.query(Configuration).filter_by(key='install_bento4').first()
+        print(should_install.to_dict())
+        return 'ok'
+    except Exception as e:
+        print('Error trying to auto install Bento4:', e)
+        db_session.rollback()
