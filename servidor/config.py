@@ -30,8 +30,8 @@ class TestingConfig(Config):
 
 class ProductionConfig(Config):
     DEBUG = False
-    DATABASE_URL = 'sqlite:///katomart.db'
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///katomart.db'
+    DATABASE_URL = 'sqlite:///katomart.sec'
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///katomart.sec'
     SECRET_KEY = 'katomart'
 
 
@@ -50,7 +50,7 @@ def set_config_from_setup() -> None:
     db_session = get_session()
 
     for key, value in setup_config.items():
-        config = Configuration(key=key, value=value)
+        config = Configuration(key=key, value= 'True' if value == 1 else 'False' if value == 0 else value)
         db_session.add(config)
 
     db_session.commit()
