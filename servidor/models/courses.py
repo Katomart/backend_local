@@ -25,6 +25,14 @@ class PlatformAuth(Base):
 
     platform = relationship("Platform", back_populates="auths")
 
+class PlatformURL(Base):
+    __tablename__ = 'platform_urls'
+    id = Column(Integer, primary_key=True)
+    platform_id = Column(Integer, ForeignKey('platforms.id'), nullable=False)
+    url_type = Column(String) # Login, dashboard, api, product, with f-variants.
+    url = Column(String)
+    platform = relationship("Platform", back_populates="urls")
+
 class Platform(Base):
     __tablename__ = 'platforms'
     id = Column(Integer, primary_key=True)
@@ -32,6 +40,7 @@ class Platform(Base):
     base_url = Column(String)
     auths = relationship("PlatformAuth", back_populates="platform")
     courses = relationship("Course", back_populates="platform")
+    urls = relationship("PlatformURL", back_populates="platform", cascade="all, delete, delete-orphan")
 
 class Course(Base):
     __tablename__ = 'courses'
