@@ -17,14 +17,29 @@ class Configuration(Base):
     def to_dict(self):
         if isinstance(self.value, bytes):
             normalized_value = self.value.decode('utf-8')
+        else:
+            normalized_value = self.value
+
         if isinstance(self.description, bytes):
             normalized_description = self.description.decode('utf-8')
+        else:
+            normalized_description = self.description
 
-        normalized_value = json.loads(self.normalized_value)
+        try:
+            normalized_value = json.loads(normalized_value)
+        except json.JSONDecodeError:
+            try:
+                normalized_value = eval(normalized_value)
+            except:
+                normalized_value = normalized_value
+
+        if not normalized_description:
+            normalized_description = 'Sem descrição fornecida pelo autor!'
+
         return {
             'id': int(self.id),
             'key': str(self.key),
             'value': normalized_value,
-            'description': normalized_description if self.description else '',
+            'description': normalized_description,
             'enabled': bool(self.enabled)
         }
