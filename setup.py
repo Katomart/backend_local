@@ -57,7 +57,7 @@ else:
     INSTALL_FFMPEG = False
 while True:
     try:
-        HAS_FFMPEG, INSTALL_FFMPEG = setup_utils.get_user_third_party_optin(tool_name='ffmpeg')
+        INSTALL_FFMPEG = setup_utils.get_user_third_party_optin(tool_name='ffmpeg')
         break
     except ValueError:
         print(SETUP_TEXTS[USER_LANGUAGE]['cli_tool_optin_input_error'])
