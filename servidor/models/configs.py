@@ -1,3 +1,5 @@
+import json
+
 from . import Base
 from sqlalchemy import Column, Integer, String, Boolean, Text
 
@@ -12,9 +14,13 @@ class Configuration(Base):
         return f"<Configuration(key='{self.key}', value='{self.value}', enabled={self.enabled})>"
 
     def to_dict(self):
+        if isinstance(self.value, bytes):
+            normalized_value = self.value.decode('utf-8')
+        else:
+            normalized_value = json.loads(self.normalized_value)
         return {
-            'id': str(self.id),
+            'id': int(self.id),
             'key': str(self.key),
-            'value': self.value.decode('utf-8') if isinstance(self.value, bytes) else str(self.value),
-            'enabled': str(self.enabled)
+            'value': normalized_value,
+            'enabled': bool(self.enabled)
         }
