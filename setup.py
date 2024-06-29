@@ -118,15 +118,15 @@ setup_utils.create_startup_script(user_platform=USER_OS,
                                   batch_name=SETUP_TEXTS[USER_LANGUAGE]['batch_name'])
 
 CONFIGS = {
-    'user_language': USER_LANGUAGE,
-    'user_os': USER_OS,
-    'user_local_password': USER_LOCAL_PASSWORD,
-    'has_ffmpeg': HAS_FFMPEG,
-    'install_ffmpeg': INSTALL_FFMPEG,
-    'has_geckodriver': HAS_GECKODRIVER,
-    'install_geckodriver': INSTALL_GECKODRIVER,
-    'has_bento4': HAS_MP4DECRYPT,
-    'install_bento4': INSTALL_BENTO4
+    'setup_user_language': USER_LANGUAGE,
+    'setup_user_os': USER_OS,
+    'setup_user_local_password': USER_LOCAL_PASSWORD,
+    'setup_has_ffmpeg': HAS_FFMPEG,
+    'setup_install_ffmpeg': INSTALL_FFMPEG,
+    'setup_has_geckodriver': HAS_GECKODRIVER,
+    'setup_install_geckodriver': INSTALL_GECKODRIVER,
+    'setup_has_bento4': HAS_MP4DECRYPT,
+    'setup_install_bento4': INSTALL_BENTO4
 }
 
 setup_utils.write_config_file(config=CONFIGS)
