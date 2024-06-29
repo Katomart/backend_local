@@ -10,12 +10,13 @@ class Configuration(Base):
     value = Column(Text, nullable=True)
     description = Column(Text, nullable=True)
     value_type = Column(Enum('str', 'int', 'float', 'bool', 'list', 'json', 'select', name='value_type'), nullable=False, default='str')
+    hidden = Column(Boolean, default=True)
     voidable = Column(Boolean, default=False)
     editable = Column(Boolean, default=True)
     enabled = Column(Boolean, default=True)
 
     def __repr__(self):
-        return f"<Configuration(key='{self.key}', value='{self.value}', description='{self.description}', value_type='{self.value_type}', voidable='{self.voidable}', can_edit='{self.editable}' enabled={self.enabled})>"
+        return f"<Configuration(key='{self.key}', value='{self.value}', description='{self.description}', value_type='{self.value_type}', hidden='{self.hidden}' voidable='{self.voidable}', can_edit='{self.editable}' enabled={self.enabled})>"
 
     def to_dict(self):
         if isinstance(self.value, bytes):
@@ -50,6 +51,7 @@ class Configuration(Base):
             'value': normalized_value,
             'description': normalized_description,
             'value_type': normalized_value_type,
+            'hidden': bool(self.hidden),
             'voidable': bool(self.voidable),
             'editable': bool(self.editable),
             'enabled': bool(self.enabled)
