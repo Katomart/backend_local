@@ -31,6 +31,7 @@ class PlatformURL(Base):
     platform_id = Column(Integer, ForeignKey('platforms.id'), nullable=False)
     url_type = Column(String) # Login, dashboard, api, product, with f-variants.
     url = Column(String)
+    update_date = Column(BigInteger, default=lambda: int(datetime.datetime.now().timestamp()))
     platform = relationship("Platform", back_populates="urls")
 
 class Platform(Base):
