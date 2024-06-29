@@ -36,24 +36,12 @@ def setup_api_routes(api_blueprint):
             return jsonify({'status': False, 'message': 'No password found'}), 403
         return jsonify({'status': True, 'message': password.to_dict()}), 200
     
-    @api_blueprint.route('/get_katomart_consent', methods=['GET'])
-    def get_katomart_consent():
-        has_consented = g.session.query(Configuration).filter_by(key='user_local_consent').first()
-        consent_date = g.session.query(Configuration).filter_by(key='user_local_consent_date').first()
-        if has_consented is None:
-            return jsonify({'status': False, 'message': 'No consent found'}), 403
-        return jsonify({
-            'status': True,
-            'message': consent_date.to_dict() if consent_date else 'No consent date found'
-        }), 200
-    
     @api_blueprint.route('/get_all_configurations', methods=['GET'])
     def get_all_configurations():
         all_configurations = g.session.query(Configuration).all()
         if not all_configurations:
             return jsonify({'status': False, 'message': 'No configurations found'}), 404
         return jsonify([configuration.to_dict() for configuration in all_configurations]), 200
-
 
     @api_blueprint.route('/get_all_accounts', methods=['GET'])
     @requires_token
