@@ -13,7 +13,7 @@ INSTALL_FFMPEG = None
 HAS_GECKODRIVER = None
 INSTALL_GECKODRIVER = None
 
-HAS_MP4DECRYPT = None
+HAS_BENTO4 = None
 INSTALL_BENTO4 = None
 
 SUPPORTED_PYTHON_VERSION = (3, 12)
@@ -92,13 +92,13 @@ if not INSTALL_GECKODRIVER:
 # MP4DECRYPT
 print(SETUP_TEXTS[USER_LANGUAGE]['bento4_introduction'])
 print(SETUP_TEXTS[USER_LANGUAGE]['check_for_cli_tool'].format('bento4'))
-HAS_MP4DECRYPT = setup_utils.check_for_cli_tool('mp4decrypt')
-if not HAS_MP4DECRYPT:
+HAS_BENTO4 = setup_utils.check_for_cli_tool('mp4decrypt')
+if not HAS_BENTO4:
     print(SETUP_TEXTS[USER_LANGUAGE]['cli_tool_not_located'].format('bento4'))
 else:
     print(SETUP_TEXTS[USER_LANGUAGE]['cli_tool_located'].format('bento4'))
     INSTALL_BENTO4 = False
-while True and not HAS_MP4DECRYPT:
+while True and not HAS_BENTO4:
     try:
         INSTALL_BENTO4 = setup_utils.get_user_third_party_optin(tool_name='bento4')
         break
@@ -126,7 +126,7 @@ CONFIGS = {
     'setup_install_ffmpeg': INSTALL_FFMPEG,
     'setup_has_geckodriver': HAS_GECKODRIVER,
     'setup_install_geckodriver': INSTALL_GECKODRIVER,
-    'setup_has_bento4': HAS_MP4DECRYPT,
+    'setup_has_bento4': HAS_BENTO4,
     'setup_install_bento4': INSTALL_BENTO4
 }
 
