@@ -45,7 +45,8 @@ if USER_OS not in SUPPORTED_OS:
 print(SETUP_TEXTS[USER_LANGUAGE]['supported_os'])
 
 # MASTER PASSWORD
-USER_LOCAL_PASSWORD = input(SETUP_TEXTS[USER_LANGUAGE]['prompt_master_password'])
+# Descomentar quando a funcionalidade for implementada
+# USER_LOCAL_PASSWORD = input(SETUP_TEXTS[USER_LANGUAGE]['prompt_master_password'])
 
 # CLI TOOLS
 print(SETUP_TEXTS[USER_LANGUAGE]['cli_tool_introduction'])
@@ -59,7 +60,7 @@ if not HAS_FFMPEG:
 else:
     print(SETUP_TEXTS[USER_LANGUAGE]['cli_tool_located'].format('ffmpeg'))
     INSTALL_FFMPEG = False
-while True:
+while True and not HAS_FFMPEG:
     try:
         INSTALL_FFMPEG = setup_utils.get_user_third_party_optin(tool_name='ffmpeg')
         break
@@ -78,7 +79,7 @@ if not HAS_GECKODRIVER:
 else:
     print(SETUP_TEXTS[USER_LANGUAGE]['cli_tool_located'].format('geckodriver'))
     INSTALL_GECKODRIVER = False
-while True:
+while True and not HAS_GECKODRIVER:
     try:
         INSTALL_GECKODRIVER = setup_utils.get_user_third_party_optin(tool_name='geckodriver')
         break
@@ -97,7 +98,7 @@ if not HAS_MP4DECRYPT:
 else:
     print(SETUP_TEXTS[USER_LANGUAGE]['cli_tool_located'].format('bento4'))
     INSTALL_BENTO4 = False
-while True:
+while True and not HAS_MP4DECRYPT:
     try:
         INSTALL_BENTO4 = setup_utils.get_user_third_party_optin(tool_name='bento4')
         break
@@ -120,7 +121,7 @@ setup_utils.create_startup_script(user_platform=USER_OS,
 CONFIGS = {
     'setup_user_language': USER_LANGUAGE,
     'setup_user_os': USER_OS,
-    'setup_user_local_password': USER_LOCAL_PASSWORD,
+    # 'setup_user_local_password': USER_LOCAL_PASSWORD,
     'setup_has_ffmpeg': HAS_FFMPEG,
     'setup_install_ffmpeg': INSTALL_FFMPEG,
     'setup_has_geckodriver': HAS_GECKODRIVER,

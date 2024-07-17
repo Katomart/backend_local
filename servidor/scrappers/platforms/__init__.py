@@ -4,7 +4,20 @@ import json
 import requests
 
 from database import get_session
+from servidor.models.courses import Platform, PlatformAuth, PlatformURL
 
+
+def set_hotmart_urls():
+    current_time = int(time.time())
+    db_session = get_session()
+
+    LOGIN = 'https://app-vlc.hotmart.com'
+    
+
+
+
+def set_platform_urls():
+    pass
 
 class Account(ABC):
     """
@@ -17,7 +30,7 @@ class Account(ABC):
         self.db_session = get_session()
         self.account_id = account_id
         self.platform_id = platform_id
-        self.session = self._restart_requests_session()
+        self.session = self.restart_requests_session()
 
     def get_current_time(self) -> int:
         """
@@ -31,7 +44,7 @@ class Account(ABC):
         """
         return json.dumps(data, indent=4, ensure_ascii=False)
 
-    def clone_main_session(self) -> requests.Session:
+    def clone_main_session_as_requests(self) -> requests.Session:
         """
         Clona a sessão principal da conta para uso temporário em requisições
         que podem mudar dados da sessão principal.
@@ -40,31 +53,25 @@ class Account(ABC):
         new_session.headers.update(self.session.headers)
         new_session.cookies.update(self.session.cookies)
 
-        new_session.auth = self.session.auth
-
-        if self.session.proxies:
-            new_session.proxies.update(self.session.proxies)
-        new_session.verify = self.session.verify
-
         return new_session
+
+    def restart_requests_session(self) -> requests.Session:
+        """
+        Inicia uma sessão limpa da biblioteca requests com configurações básicas.
+        """
+        session = requests.Session()
+        session.headers.update({'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:122.0) Gecko/20100101 Firefox/122.0'})
+        return session
 
     def __del__(self):
         self.logout()
-
-    def _restart_requests_session(self) -> requests.Session:
-            """
-            Inicia uma sessão limpa da biblioteca requests com configurações básicas.
-            """
-            session = requests.Session()
-            session.headers.update({'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:122.0) Gecko/20100101 Firefox/122.0'})
-            return session
 
     @abstractmethod
     def login(self):
         """
         Método abstrato para realizar o login na plataforma.
         """
-    
+
     @abstractmethod
     def logout(self):
         """
@@ -78,49 +85,49 @@ class Account(ABC):
         """
 
     @abstractmethod
-    def list_account_products(self, get_extra_info: bool = False):
+    def list_account_courses(self, get_extra_info: bool = False):
         """
-        Método abstrato para obter os produtos associados à conta.
-        """
-
-    @abstractmethod
-    def format_account_product(self, account_products: dict = None):
-        """
-        Método abstrato para formatar um produto ao padrão Módulo/Aula/Arquivos
+        Método abstrato para obter os cursos associados à conta.
         """
 
     @abstractmethod
-    def get_product_information(self, product_id : str | int, other_data=None):
+    def format_account_course(self, account_course: dict = None):
         """
-        Método abstrato para obter informações de um produto específico.
-        """
-
-    @abstractmethod
-    def get_content_modules(self, product_info: dict, other_data=None):
-        """
-        Método abstrato para obter os módulos de um produto.
+        Método abstrato para formatar um curso ao padrão Módulo/Aula/Arquivos
         """
 
     @abstractmethod
-    def get_content_module_info(self, product_info: dict, module_id: str | int, other_data=None):
+    def get_course_information(self, course_id : str | int, other_data=None):
         """
-        Método abstrato para obter os módulos de um produto.
+        Método abstrato para obter informações de um curso específico.
         """
 
     @abstractmethod
-    def get_module_lessons(self, content_id: str | int, module_id: str | int, other_data=None):
+    def get_course_modules(self, course_info: dict, other_data=None):
+        """
+        Método abstrato para obter os módulos de um curso.
+        """
+
+    @abstractmethod
+    def get_course_module_info(self, course_info: dict, module_id: str | int, other_data=None):
+        """
+        Método abstrato para obter os módulos de um curso.
+        """
+
+    @abstractmethod
+    def get_module_lessons(self, course_id: str | int, module_id: str | int, other_data=None):
         """
         Método abstrato para obter as lições de um módulo.
         """
 
     @abstractmethod
-    def get_module_lesson_info(self, content_id: str | int, module_id: str | int, lesson_id: str | int, other_data=None):
+    def get_module_lesson_info(self, course_id: str | int, module_id: str | int, lesson_id: str | int, other_data=None):
         """
         Método abstrato para obter as lições de um módulo.
         """
 
     @abstractmethod
-    def get_lesson_files(self, content_id: str | int, module_id: str | int, lesson_id: str | int, other_data=None):
+    def get_lesson_files(self, course_id: str | int, module_id: str | int, lesson_id: str | int, other_data=None):
         """
         Método abstrato para obter os arquivos de uma lição.
         """

@@ -1,3 +1,4 @@
+import shutil
 import os
 
 from flask import jsonify, g, send_from_directory
@@ -7,8 +8,7 @@ from .auth import requires_token, requires_consent
 from .models.courses import PlatformAuth, Platform, Course, Module, Lesson, File
 from .models.configs import Configuration
 
-from .install import try_auto_install_bento4
-
+from .install import try_auto_install_tp_tool
 
 def setup_main_route(main_bp):
     @main_bp.route('/', defaults={'path': ''})
@@ -21,30 +21,93 @@ def setup_main_route(main_bp):
 
 
 def setup_api_routes(api_blueprint):
+    TP_IDS = {
+        1: 'ffmpeg',
+        2: 'geckodriver',
+        3: 'bento4'
+    }
+
     @api_blueprint.route('/ping', methods=['GET'])
     def ping():
         return jsonify({'message': 'pong'}), 200
     
     @api_blueprint.route('/test_route', methods=['GET'])
     def test_route():
-        return jsonify(try_auto_install_bento4()), 200
+        return jsonify(), 200
     
     @api_blueprint.route('/get_katomart_password', methods=['GET'])
-    def get_katomart_password():
+    def get_katomart_password():  # Método a ser implementado no futuro.
         password = g.session.query(Configuration).filter_by(key='user_local_password').first()
         if password is None:
-            return jsonify({'status': False, 'message': 'No password found'}), 403
+            return jsonify({'status': False, 'message': 'No password found'}), 404
         return jsonify({'status': True, 'message': password.to_dict()}), 200
+
+    @api_blueprint.route('/get_katomart_consent', methods=['GET'])
+    def get_katomart_consent():
+        consent = g.session.query(Configuration).filter_by(key='setup_user_local_consent_date').first()
+        if consent is None:
+            return jsonify({'status': False, 'message': 'No consent found'}), 404
+        return jsonify({'status': True, 'message': consent.to_dict()}), 200
     
     @api_blueprint.route('/get_all_configurations', methods=['GET'])
     def get_all_configurations():
         all_configurations = g.session.query(Configuration).all()
         if not all_configurations:
             return jsonify({'status': False, 'message': 'No configurations found'}), 404
-        return jsonify([configuration.to_dict() for configuration in all_configurations]), 200
+        return jsonify({'status': True, 'message': [configuration.to_dict() for configuration in all_configurations]}), 200
+    
+    @api_blueprint.route('/configurations/<int:id>', methods=['GET'])
+    @requires_consent
+    def get_configuration(id):
+        configuration = g.session.query(Configuration).get(id)
+        if configuration is None:
+            return jsonify({'status': False, 'message': 'Configuration not found'}), 404
+        return jsonify({'status': True, 'message': configuration.to_dict()}), 200
+
+    @api_blueprint.route('/configurations/<int:id>', methods=['UPDATE'])
+    @requires_consent
+    def update_configuration(id):
+        configuration = g.session.query(Configuration).get(id)
+        if configuration is None:
+            return jsonify({'status': False, 'message': 'Configuration not found'}), 404
+        configuration.update(g.request.json)
+        return jsonify({'status': True, 'message': configuration.to_dict()}), 200
+    
+    @api_blueprint.route('/check_third_party_tool/<int:id>', methods=['GET'])
+    @requires_consent
+    def check_third_party_tool(id):
+        #tp reads like toilet paper lmao
+        has_tool = shutil.which(TP_IDS.get(id))
+        if has_tool is None:
+            tool = g.session.query(Configuration).filter_by(key=f'install_{TP_IDS.get(id)}').first()
+            if not tool['value']:
+                return jsonify({'status': False, 'message': f'{TP_IDS.get(id)} not present and not marked for installation!'}), 404
+            else:
+                return jsonify({'status': False, 'message': f'{TP_IDS.get(id)} not present but marked for installation! Proceeding with install...'}), 404
+        return jsonify({'status': True, 'message': f'{TP_IDS.get(id)} is present and should be working fine.'}), 200
+    
+    @api_blueprint.route('/auto_install_third_party_tool/<int:id>', methods=['GET'])
+    @requires_consent
+    def auto_install_third_party_tool(id):
+        user_os = g.session.query(Configuration).filter_by(key='user_os').first()
+        if user_os['value'] not in ('linux', 'darwin', 'win32'):
+            return jsonify({'status': False, 'message': 'Unsupported OS'}), 404
+        
+        if id not in TP_IDS.keys():
+            return jsonify({'status': False, 'message': 'Invalid tool ID'}), 404
+        
+        r = try_auto_install_tp_tool(TP_IDS.get(id))
+        if not r:
+            return jsonify({'status': False, 'message': f'{TP_IDS.get(id)} failed to install!'}), 404
+        return jsonify({'status': True, 'message': f'{TP_IDS.get(id)} installed successfully!'}), 200
+    
+    @api_blueprint.route('/install_third_party_tool', methods=['GET'])
+    @requires_consent
+    def install_third_party_tool():
+        return jsonify({'status': False, 'message': 'This route is not implemented yet!'}), 404
+
 
     @api_blueprint.route('/get_all_accounts', methods=['GET'])
-    @requires_token
     @requires_consent
     def get_all_accounts():
         all_accounts = g.session.query(PlatformAuth).all()
@@ -52,9 +115,8 @@ def setup_api_routes(api_blueprint):
             return jsonify({'message': 'No accounts found'}), 404
         return jsonify([account.to_dict() for account in all_accounts]), 200
     
-    @requires_token
-    @requires_consent
     @api_blueprint.route('/platform_accounts/<int:id>', methods=['GET'])
+    @requires_consent
     def get_account(id):
         auth = g.session.query(PlatformAuth).get(id)
         if auth is None:

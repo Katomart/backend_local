@@ -78,12 +78,6 @@ def set_default_config() -> None:
         db_session.add(download_conf)
         db_session.add(char_conf)
 
-        # Home Stuff
-        home_conf, repo_conf, dev_conf = set_home_address()
-        db_session.add(home_conf)
-        db_session.add(repo_conf)
-        db_session.add(dev_conf)
-
         user_local_consent = Configuration(key='setup_user_local_consent', value='False', value_type='bool', hidden=True)
         db_session.add(user_local_consent)
 
@@ -225,6 +219,12 @@ def set_default_config() -> None:
         db_session.add(api_consent)
         api_consent_date = Configuration(key='remote_api_consent_date', value='0', value_type='int', hidden=True)
         db_session.add(api_consent_date)
+
+        # Home Stuff
+        home_conf, repo_conf, dev_conf = set_home_address()
+        db_session.add(home_conf)
+        db_session.add(repo_conf)
+        db_session.add(dev_conf)
 
         db_session.commit()
 
