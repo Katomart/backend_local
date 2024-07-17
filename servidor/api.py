@@ -1,7 +1,7 @@
 import shutil
 import os
 
-from flask import jsonify, g, send_from_directory
+from flask import jsonify, g, send_from_directory, request
 
 from .auth import requires_token, requires_consent
 
@@ -53,21 +53,25 @@ def setup_api_routes(api_blueprint):
             return jsonify({'status': False, 'message': 'No configurations found'}), 404
         return jsonify({'status': True, 'message': [configuration.to_dict() for configuration in all_configurations]}), 200
     
-    @api_blueprint.route('/configurations/<int:id>', methods=['GET'])
+    @api_blueprint.route('/configurations/<string:key>', methods=['GET'])
     @requires_consent
-    def get_configuration(id):
-        configuration = g.session.query(Configuration).get(id)
+    def get_configuration(key):
+        configuration = g.session.query(Configuration).filter_by(key=key).first()
         if configuration is None:
             return jsonify({'status': False, 'message': 'Configuration not found'}), 404
         return jsonify({'status': True, 'message': configuration.to_dict()}), 200
 
-    @api_blueprint.route('/configurations/<int:id>', methods=['UPDATE'])
+    @api_blueprint.route('/configurations/<string:key>', methods=['PUT'])
     @requires_consent
-    def update_configuration(id):
-        configuration = g.session.query(Configuration).get(id)
+    def update_configuration(key):
+        configuration = g.session.query(Configuration).filter_by(key=key).first()
         if configuration is None:
             return jsonify({'status': False, 'message': 'Configuration not found'}), 404
-        configuration.update(g.request.json)
+        data = request.json
+        if not data:
+            return jsonify({'status': False, 'message': 'No data provided'}), 400
+        configuration.update(data)
+        g.session.commit()
         return jsonify({'status': True, 'message': configuration.to_dict()}), 200
     
     @api_blueprint.route('/check_third_party_tool/<int:id>', methods=['GET'])
