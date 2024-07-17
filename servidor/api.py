@@ -37,10 +37,7 @@ def setup_api_routes(api_blueprint):
     
     @api_blueprint.route('/get_katomart_password', methods=['GET'])
     def get_katomart_password():  # Método a ser implementado no futuro.
-        password = g.session.query(Configuration).filter_by(key='user_local_password').first()
-        if password is None:
-            return jsonify({'status': False, 'message': 'No password found'}), 404
-        return jsonify({'status': True, 'message': password.to_dict()}), 200
+        return jsonify({'status': False, 'message': 'This route is not implemented yet!'}), 404
 
     @api_blueprint.route('/get_katomart_consent', methods=['GET'])
     def get_katomart_consent():
