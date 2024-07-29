@@ -1,24 +1,31 @@
 import json
 
 from . import Base
-from sqlalchemy import Column, Integer, String, Boolean, Text, Enum
+from sqlalchemy import Column, Integer, String, Boolean, Text
 
 class Configuration(Base):
     __tablename__ = 'configs'
     id = Column(Integer, primary_key=True, autoincrement=True)
+    configuration_group_name = Column(String(100), nullable=False, default='geral')
     key = Column(String(100), nullable=False, unique=True)
+    title = Column(String(300), nullable=True, default='Configuração sem título!')
     value = Column(Text, nullable=True)
     description = Column(Text, nullable=True)
-    value_type = Column(Enum('str', 'int', 'float', 'bool', 'list', 'json', 'select', name='value_type'), nullable=False, default='str')
+    value_type = Column(String(32), nullable=False, default='str')  # 'str', 'int', 'float', 'bool', 'list', 'json'
     hidden = Column(Boolean, default=True)
     voidable = Column(Boolean, default=False)
     editable = Column(Boolean, default=True)
     enabled = Column(Boolean, default=True)
 
     def __repr__(self):
-        return f"<Configuration(key='{self.key}', value='{self.value}', description='{self.description}', value_type='{self.value_type}', hidden='{self.hidden}' voidable='{self.voidable}', can_edit='{self.editable}' enabled={self.enabled})>"
+        return f"<Configuration(configuration_group_name='{self.configuration_group_name}', key='{self.key}', title='{self.title}, value='{self.value}', description='{self.description}', value_type='{self.value_type}', hidden='{self.hidden}' voidable='{self.voidable}', can_edit='{self.editable}' enabled={self.enabled})>"
 
     def to_dict(self):
+        if isinstance(self.configuration_group_name, bytes):
+            normalized_config_group = self.configuration_group_name.decode('utf-8')
+        else:
+            normalized_config_group = self.configuration_group_name
+        
         if isinstance(self.value, bytes):
             normalized_value = self.value.decode('utf-8')
         else:
@@ -38,16 +45,21 @@ class Configuration(Base):
                 normalized_value = normalized_value
 
         if not normalized_description:
-            normalized_description = 'Sem descrição fornecida pelo autor!'
+            normalized_description = ''
 
         if isinstance(self.value_type, bytes):
             normalized_value_type = self.value_type.decode('utf-8')
         else:
             normalized_value_type = self.value_type
 
+        if normalized_value_type == 'bool':
+            normalized_value = bool(normalized_value)
+
         return {
             'id': int(self.id),
+            'configuration_group_name': normalized_config_group,
             'key': str(self.key),
+            'title': str(self.title),
             'value': normalized_value,
             'description': normalized_description,
             'value_type': normalized_value_type,
