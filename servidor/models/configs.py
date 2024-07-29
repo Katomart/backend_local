@@ -16,16 +16,18 @@ class Configuration(Base):
     voidable = Column(Boolean, default=False)
     editable = Column(Boolean, default=True)
     enabled = Column(Boolean, default=True)
+    created_at = Column(Integer, nullable=False, default=0)
+    updated_at = Column(Integer, nullable=False, default=0)
 
     def __repr__(self):
-        return f"<Configuration(configuration_group_name='{self.configuration_group_name}', key='{self.key}', title='{self.title}, value='{self.value}', description='{self.description}', value_type='{self.value_type}', hidden='{self.hidden}' voidable='{self.voidable}', can_edit='{self.editable}' enabled={self.enabled})>"
+        return f"<Configuration(configuration_group_name='{self.configuration_group_name}', key='{self.key}', title='{self.title}, value='{self.value}', description='{self.description}', value_type='{self.value_type}', hidden='{self.hidden}' voidable='{self.voidable}', can_edit='{self.editable}' enabled={self.enabled}, created_at='{self.created_at}, updated_at='{self.updated_at}')>"
 
     def to_dict(self):
         if isinstance(self.configuration_group_name, bytes):
             normalized_config_group = self.configuration_group_name.decode('utf-8')
         else:
             normalized_config_group = self.configuration_group_name
-        
+
         if isinstance(self.value, bytes):
             normalized_value = self.value.decode('utf-8')
         else:
@@ -66,5 +68,7 @@ class Configuration(Base):
             'hidden': bool(self.hidden),
             'voidable': bool(self.voidable),
             'editable': bool(self.editable),
-            'enabled': bool(self.enabled)
+            'enabled': bool(self.enabled),
+            'created_at': int(self.created_at),
+            'updated_at': int(self.updated_at)
         }
