@@ -99,6 +99,8 @@ def create_windows_batch(venv_path: str='.', start_string: str='', batch_name: s
     batch_content = f"""
 @echo off
 echo {start_string}
+call {venv_path}/Scripts/activate
+set PYTHONPATH=%PYTHONPATH%;{os.path.abspath(os.path.dirname(__file__))}
 set FLASK_APP={venv_path}/servidor/app.py
 set FLASK_ENV=production
 {venv_path}/Scripts/flask run --port=6102
@@ -112,6 +114,8 @@ def create_unix_script(venv_path: str='.', start_string: str='', batch_name: str
     script_content = f"""
 #!/bin/bash
 echo "{start_string}"
+source {venv_path}/bin/activate
+export PYTHONPATH=$PYTHONPATH:{os.path.abspath(os.path.dirname(__file__))}
 export FLASK_APP={venv_path}/servidor/app.py
 export FLASK_ENV=development
 {venv_path}/bin/flask run --port=6102
