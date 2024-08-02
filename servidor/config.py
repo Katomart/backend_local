@@ -158,10 +158,10 @@ def set_default_config() -> None:
         fast_ffmpeg_hls_conversion_arguments = Configuration(configuration_group_name='ffmpeg', key='fast_ffmpeg_hls_conversion_arguments', title='Comando para a concatenação rápida', description='Mantenha o padrão. o valor "{input_file}" e o valor "{output_file}" são obrigatórios, e os demais argumentos devem ser separados por ponto e vírgula (;). input_file se refere ao arquivo de entrada, e output_file se refere ao arquivo de saída, ambos são gerenciados pelo programa.',  value='-i;"{input_file}";-c;copy;"{output_file}"', value_type='str', hidden=False)
         db_session.add(fast_ffmpeg_hls_conversion_arguments)
 
-        download_videos = Configuration(configuration_group_name='download', key='download_videos', title='Se vídeos deverão ser baixados', description='Para definir os players, vá para a seção de definição de conteúdo.',  value=True, value_type='select', hidden=False)
+        download_videos = Configuration(configuration_group_name='download', key='download_videos', title='Se vídeos deverão ser baixados', description='Para definir os players, vá para a seção de definição de conteúdo.',  value=True, value_type='bool', hidden=False)
         db_session.add(download_videos)
 
-        download_attachments = Configuration(configuration_group_name='download', key='download_attachments', title='Se anexos deverão ser baixados', description='Para controlar os tipos e possíveis conversões, vá até a seção de definição de conteúdo.',  value=True, value_type='select', hidden=False)
+        download_attachments = Configuration(configuration_group_name='download', key='download_attachments', title='Se anexos deverão ser baixados', description='Para controlar os tipos e possíveis conversões, vá até a seção de definição de conteúdo.',  value=True, value_type='bool', hidden=False)
         db_session.add(download_attachments)
 
         video_download_format = Configuration(configuration_group_name='download', key='video_format', title='Formato do vídeo a ser salvo', description='Utilizar a extensão, valores suportados: mp4, avi, mov, webm, gif',  value='mp4', value_type='str', hidden=False)
