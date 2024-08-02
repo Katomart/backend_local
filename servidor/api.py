@@ -41,7 +41,7 @@ def setup_api_routes(api_blueprint):
 
     @api_blueprint.route('/get_katomart_consent', methods=['GET'])
     def get_katomart_consent():
-        consent = g.session.query(Configuration).filter_by(key='setup_user_local_consent_date').first()
+        consent = g.session.query(Configuration).filter_by(key='setup_user_local_consent').first()
         if consent is None:
             return jsonify({'status': False, 'message': 'No consent found'}), 404
         return jsonify({'status': True, 'message': consent.to_dict()}), 200
